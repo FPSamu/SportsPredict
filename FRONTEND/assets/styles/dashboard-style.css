@@ -13,11 +13,6 @@ body {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
 }
 
-.team-logo {
-    width: 2.5vw;
-    height: 2.5vw;
-}
-
 .insight-item:last-child {
     border-bottom: none !important;
     padding-bottom: 0 !important;
@@ -68,4 +63,63 @@ footer {
 
 .modal.show .modal-dialog {
     transform: scale(1);
+}
+
+/* Estilos adicionales para asegurar que los modales oscuros se vean bien */
+.modal-content.bg-dark .form-control {
+    background-color: #495057;
+    /* Un gris un poco más claro para inputs */
+    color: #fff;
+    border-color: #6c757d;
+}
+
+.modal-content.bg-dark .form-control:focus {
+    background-color: #495057;
+    color: #fff;
+    border-color: #86b7fe;
+    /* Color de borde de Bootstrap en focus */
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    /* Sombra de Bootstrap en focus */
+}
+
+.modal-content.bg-dark .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+    /* Para que el botón de cerrar sea más visible */
+}
+
+.dropdown-menu.dropdown-menu-dark {
+    /* Estilos para el dropdown oscuro */
+    background-color: #343a40;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.dropdown-menu.dropdown-menu-dark .dropdown-item {
+    color: #adb5bd;
+}
+
+.dropdown-menu.dropdown-menu-dark .dropdown-item:hover,
+.dropdown-menu.dropdown-menu-dark .dropdown-item:focus {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Estilo para logo de equipo */
+.team-logo {
+    width: 40px;
+    /* Ajusta según necesites */
+    height: 40px;
+    /* Ajusta según necesites */
+    object-fit: contain;
+    /* Para que el logo no se distorsione */
+}
+
+/* Efecto hover en tarjetas */
+.hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 123, 255, 0.15) !important;
+    /* Sombra azulada al pasar el ratón */
 }
