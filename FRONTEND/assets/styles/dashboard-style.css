@@ -2,15 +2,33 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 70px;
+    background-color: #212529;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
 }
 
 .hover-card {
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    border: 1px rgb(95, 95, 95) solid;
 }
 
 .hover-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15) !important;
+}
+
+.insight-item {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .insight-item:last-child {
@@ -24,21 +42,20 @@ body {
     scrollbar-width: none;
 }
 
+.overflow-auto::-webkit-scrollbar {
+    display: none;
+}
+
 .nav-link:hover {
-    text-decoration: underline !important;
+    color: #0d6efd !important;
+}
+
+.nav-link.active {
+    font-weight: 500;
 }
 
 .text-muted {
-    color: rgb(170, 169, 169) !important;
-}
-
-.card {
-    border-radius: 15px;
-    border: 1px rgb(95, 95, 95) solid;
-}
-
-.overflow-auto::-webkit-scrollbar {
-    display: none;
+    color: #adb5bd !important;
 }
 
 .progress-bar {
@@ -47,17 +64,11 @@ body {
 
 .navbar {
     transition: box-shadow 0.3s ease;
-}
-
-footer {
-    margin-top: auto;
+    border-bottom: 1px solid #495057;
 }
 
 .modal.fade .modal-dialog {
     transition: transform 0.3s ease-out;
-}
-
-.modal.fade .modal-dialog {
     transform: scale(0.95);
 }
 
@@ -65,30 +76,36 @@ footer {
     transform: scale(1);
 }
 
-/* Estilos adicionales para asegurar que los modales oscuros se vean bien */
+.modal-content.bg-dark {
+    border: 1px solid #495057;
+}
+
 .modal-content.bg-dark .form-control {
     background-color: #495057;
-    /* Un gris un poco más claro para inputs */
     color: #fff;
     border-color: #6c757d;
+}
+
+.modal-content.bg-dark .form-control::placeholder {
+    color: #adb5bd;
 }
 
 .modal-content.bg-dark .form-control:focus {
     background-color: #495057;
     color: #fff;
     border-color: #86b7fe;
-    /* Color de borde de Bootstrap en focus */
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-    /* Sombra de Bootstrap en focus */
 }
 
 .modal-content.bg-dark .btn-close-white {
     filter: invert(1) grayscale(100%) brightness(200%);
-    /* Para que el botón de cerrar sea más visible */
+}
+
+.dropdown-menu {
+    z-index: 1050;
 }
 
 .dropdown-menu.dropdown-menu-dark {
-    /* Estilos para el dropdown oscuro */
     background-color: #343a40;
     border-color: rgba(255, 255, 255, 0.15);
 }
@@ -103,23 +120,70 @@ footer {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Estilo para logo de equipo */
+.dropdown-menu.dropdown-menu-dark .dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
 .team-logo {
     width: 40px;
-    /* Ajusta según necesites */
     height: 40px;
-    /* Ajusta según necesites */
     object-fit: contain;
-    /* Para que el logo no se distorsione */
 }
 
-/* Efecto hover en tarjetas */
-.hover-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.filter-buttons {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
 
-.hover-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 123, 255, 0.15) !important;
-    /* Sombra azulada al pasar el ratón */
+@media (max-width: 575.98px) {
+    .display-4 {
+        font-size: 2.5rem;
+    }
+
+    .lead {
+        font-size: 1rem;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .h3 {
+        font-size: 1.5rem;
+    }
+
+    .card .card-body .small,
+    .card .card-body .fw-medium.small {
+        font-size: 0.8rem;
+    }
+
+    .card .card-body .fw-medium.text-info {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+
+    .card .badge {
+        font-size: 0.7rem;
+        padding: 0.25em 0.5em;
+    }
+
+    .card .team-logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .insight-item .h6 {
+        font-size: 0.9rem;
+    }
+
+    .insight-item .small {
+        font-size: 0.8rem;
+    }
+
+    .filter-buttons .btn {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .hero-buttons.flex-column {
+        gap: 0.5rem !important;
+    }
 }

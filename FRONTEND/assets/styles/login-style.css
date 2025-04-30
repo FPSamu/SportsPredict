@@ -1,332 +1,316 @@
-/* Base styles */
 :root {
-    --primary: #2563eb;
-    --primary-hover: #1d4ed8;
-    --slate-50: #f8fafc;
-    --slate-100: #f1f5f9;
-    --slate-200: #e2e8f0;
-    --slate-300: #cbd5e1;
-    --slate-400: #94a3b8;
-    --slate-500: #64748b;
-    --slate-600: #475569;
-    --slate-700: #334155;
-    --slate-800: #1e293b;
-    --slate-900: #0f172a;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
   }
   
   * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   }
   
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(to bottom right, var(--slate-50), var(--slate-100));
-    color: var(--slate-800);
-    line-height: 1.5;
-    min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(to bottom right, var(--slate-50), var(--slate-100));
+  color: var(--slate-800);
+  line-height: 1.5;
+  min-height: 100vh;
   }
   
-  /* Container */
   .container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
   }
   
-  /* Card */
   .auth-card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 28rem;
-    overflow: hidden;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 28rem;
+  overflow: hidden;
   }
   
-  /* Tabs */
   .tabs {
-    position: relative;
+  position: relative;
   }
   
   .tabs input[type="radio"] {
-    display: none;
+  display: none;
   }
   
   .tabs label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 49%;
-    padding: 1rem;
-    background: var(--slate-100);
-    color: var(--slate-500);
-    font-weight: 500;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 49%;
+  padding: 1rem;
+  background: var(--slate-100);
+  color: var(--slate-500);
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
   }
   
   .tabs label:hover {
-    background: var(--slate-200);
+  background: var(--slate-200);
   }
   
   .tabs label svg {
-    transition: stroke 0.3s ease;
+  transition: stroke 0.3s ease;
   }
   
   #login-tab:checked ~ label[for="login-tab"],
   #register-tab:checked ~ label[for="register-tab"] {
-    background: white;
-    color: var(--primary);
+  background: white;
+  color: var(--primary);
   }
   
-  /* Form Content */
   .tab-content {
-    padding: 1.5rem;
+  padding: 1.5rem;
   }
   
   .login-form,
   .register-form {
-    display: none;
+  display: none;
   }
   
   #login-tab:checked ~ .tab-content .login-form,
   #register-tab:checked ~ .tab-content .register-form {
-    display: block;
+  display: block;
   }
   
-  /* Form Header */
   .form-header {
-    text-align: center;
-    margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
   }
   
   .form-header h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--slate-800);
-    margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--slate-800);
+  margin-bottom: 0.5rem;
   }
   
   .form-header p {
-    color: var(--slate-500);
+  color: var(--slate-500);
   }
   
-  /* Form Groups */
   .form-group {
-    margin-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
   }
   
   label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--slate-700);
-    margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--slate-700);
+  margin-bottom: 0.5rem;
   }
   
   input[type="text"],
   input[type="email"],
   input[type="password"] {
-    width: 100%;
-    padding: 0.625rem 0.75rem;
-    border: 1px solid var(--slate-300);
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--slate-800);
-    transition: all 0.2s;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--slate-300);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--slate-800);
+  transition: all 0.2s;
   }
   
   input[type="text"]:focus,
   input[type="email"]:focus,
   input[type="password"]:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
   }
   
-  /* Password Input */
   .password-input {
-    position: relative;
+  position: relative;
   }
   
   .toggle-password {
-    position: absolute;
-    right: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    padding: 0;
-    color: var(--slate-400);
-    cursor: pointer;
-    transition: color 0.2s;
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--slate-400);
+  cursor: pointer;
+  transition: color 0.2s;
   }
   
   .toggle-password:hover {
-    color: var(--slate-600);
+  color: var(--slate-600);
   }
   
-  /* Checkbox */
   .checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--slate-600);
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--slate-600);
+  cursor: pointer;
   }
   
   .checkbox-label input[type="checkbox"] {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 0.25rem;
-    border: 1px solid var(--slate-300);
-    accent-color: var(--primary);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--slate-300);
+  accent-color: var(--primary);
   }
   
-  /* Form Row */
   .form-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
   }
   
   .forgot-password {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--primary);
-    text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
   }
   
   .forgot-password:hover {
-    text-decoration: underline;
+  text-decoration: underline;
   }
   
-  /* Buttons */
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.625rem 1rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
   }
   
   .btn-primary {
-    background: var(--primary);
-    color: white;
+  background: var(--primary);
+  color: white;
   }
   
   .btn-primary:hover {
-    background: var(--primary-hover);
+  background: var(--primary-hover);
   }
   
   .btn-social {
-    background: var(--slate-100);
-    color: var(--slate-700);
-    padding: 0.5rem;
-    width: auto;
+  background: var(--slate-100);
+  color: var(--slate-700);
+  padding: 0.5rem;
+  width: auto;
   }
   
   .btn-social:hover {
-    background: var(--slate-200);
+  background: var(--slate-200);
   }
   
-  /* Divider */
   .divider {
-    position: relative;
-    text-align: center;
-    margin: 1.5rem 0;
+  position: relative;
+  text-align: center;
+  margin: 1.5rem 0;
   }
   
   .divider::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
-    height: 1px;
-    background: var(--slate-200);
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background: var(--slate-200);
   }
   
   .divider span {
-    position: relative;
-    background: white;
-    padding: 0 0.75rem;
-    color: var(--slate-500);
-    font-size: 0.875rem;
+  position: relative;
+  background: white;
+  padding: 0 0.75rem;
+  color: var(--slate-500);
+  font-size: 0.875rem;
   }
   
-  /* Social Buttons */
   .social-buttons {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
   }
   
-  /* Terms Checkbox */
   .terms {
-    margin: 1.25em 0;
+  margin: 1.25em 0;
   }
   
   .terms a {
-    color: var(--primary);
-    text-decoration: none;
+  color: var(--primary);
+  text-decoration: none;
   }
   
   .terms a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
   }
   
-  /* Footer */
   .auth-footer {
-    padding: 1.5rem;
-    background: var(--slate-50);
-    border-top: 1px solid var(--slate-200);
-    text-align: center;
+  padding: 1.5rem;
+  background: var(--slate-50);
+  border-top: 1px solid var(--slate-200);
+  text-align: center;
   }
   
   .auth-footer p {
-    font-size: 0.75rem;
-    color: var(--slate-500);
+  font-size: 0.75rem;
+  color: var(--slate-500);
   }
   
   .auth-footer a {
-    color: var(--primary);
-    text-decoration: none;
+  color: var(--primary);
+  text-decoration: none;
   }
   
   .auth-footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
   }
   
-  /* Responsive */
   @media (min-width: 640px) {
-    .container {
-      padding: 1.5rem;
-    }
-    
-    .auth-card {
-      max-width: 32rem;
-    }
-    
-    .form-header h1 {
-      font-size: 1.875rem;
-    }
-    
-    .tabs label {
-      font-size: 1rem;
-    }
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .auth-card {
+    max-width: 32rem;
+  }
+  
+  .form-header h1 {
+    font-size: 1.875rem;
+  }
+  
+  .tabs label {
+    font-size: 1rem;
+  }
   }
