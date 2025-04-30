@@ -1,0 +1,237 @@
+body {
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #212529;
+    color: #dee2e6;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #212529;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-top: 1px solid #495057;
+}
+
+footer .nav-link {
+    padding: 0.5rem 0.5rem;
+}
+
+.navbar {
+    border-bottom: 1px solid #495057;
+}
+
+.navbar-brand .text-primary {
+    color: #0d6efd !important;
+}
+
+.nav-link.active {
+    font-weight: 500;
+    color: #0d6efd !important;
+}
+
+.nav-link {
+    color: #dee2e6;
+}
+
+.nav-link:hover {
+    color: #f8f9fa;
+}
+
+.hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: .5rem;
+    border: 1px solid #495057;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15) !important;
+}
+
+.modal-content.bg-dark {
+    border: 1px solid #495057;
+}
+
+.modal-content.bg-dark .modal-header,
+.modal-content.bg-dark .modal-footer {
+    border-color: #495057;
+}
+
+.modal-content.bg-dark .modal-header.border-danger {
+    border-color: #dc3545 !important;
+}
+
+.modal-content.bg-dark .form-control {
+    background-color: #495057;
+    color: #fff;
+    border-color: #6c757d;
+}
+
+.modal-content.bg-dark .form-control::placeholder {
+    color: #adb5bd;
+}
+
+.modal-content.bg-dark .form-control:focus {
+    background-color: #495057;
+    color: #fff;
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.modal-content.bg-dark .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.dropdown-menu {
+    z-index: 1050;
+}
+
+.dropdown-menu.dropdown-menu-dark {
+    background-color: #343a40;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.dropdown-menu.dropdown-menu-dark .dropdown-item {
+    color: #adb5bd;
+    font-size: 0.9rem;
+}
+
+.dropdown-menu.dropdown-menu-dark .dropdown-item:hover,
+.dropdown-menu.dropdown-menu-dark .dropdown-item:focus {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dropdown-menu.dropdown-menu-dark .dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.overflow-auto::-webkit-scrollbar {
+    display: none;
+}
+
+.overflow-auto {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.trending-card .team-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    background-color: #ffffff;
+    padding: 2px;
+}
+
+.filter-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.filter-container .btn {
+    white-space: nowrap;
+}
+
+.trending-card .team-name {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.trending-card .match-score {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+    font-weight: 500;
+    color: #f8f9fa;
+}
+
+.trending-card .match-status {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+.trending-card .card-body {
+    padding: 1rem;
+    text-align: center;
+}
+
+.trending-card .display-6 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.trending-card .badge {
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.trending-card small.pe-3.fw-bold {
+    font-size: 0.75rem;
+}
+
+.trending-card .card-header {
+    padding: 0.5rem 0.75rem;
+}
+
+@media (max-width: 575.98px) {
+
+    .h3 {
+        font-size: 1.5rem;
+    }
+
+    .filter-container .btn {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .filter-container .btn i {
+        font-size: 0.8em;
+    }
+
+    .trending-card .card-body {
+        padding: 0.8rem;
+    }
+
+    .trending-card .team-logo {
+        width: 35px;
+        height: 35px;
+    }
+
+    .trending-card .team-name {
+        font-size: 0.75rem;
+        margin-top: 0.3rem;
+    }
+
+    .trending-card .display-6 {
+        font-size: 1.25rem;
+    }
+
+    .trending-card .match-score {
+        font-size: 1.4rem;
+        margin: 0.5rem 0;
+    }
+
+    .trending-card .match-status {
+        font-size: 0.7rem;
+    }
+
+    .trending-card .badge,
+    .trending-card small.pe-3.fw-bold {
+        font-size: 0.7rem;
+    }
+
+    .trending-card .card-header {
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+    }
+
+}
