@@ -61,7 +61,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    width: 50%;
+    width: 49%;
     padding: 1rem;
     background: var(--slate-100);
     color: var(--slate-500);
