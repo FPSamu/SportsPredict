@@ -34,7 +34,7 @@
                             <p>Inicia sesión en tu cuenta</p>
                         </div>
 
-                        <form>
+                        <form id="loginForm">
                             <div class="form-group">
                                 <label for="login-Correo Electrónico">Correo Electrónico</label>
                                 <input type="email" id="login-email" placeholder="pepe@jemplo.com" required>
@@ -58,7 +58,7 @@
                                 <a href="#" class="forgot-password">Olvidaste tu contraseña?</a>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
 
                             <div class="divider">
                                 <span>o continuar con</span>
@@ -132,5 +132,17 @@
             </footer>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const loginForm = document.getElementById('loginForm');
+
+          if (loginForm) {
+            loginForm.addEventListener('submit', function(event) {
+              event.preventDefault();
+              window.location.href = 'dashboard.html';
+            });
+          }
+        });
+      </script>
 </body>
 </html>
