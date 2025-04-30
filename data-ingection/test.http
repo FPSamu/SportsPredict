@@ -1,0 +1,3 @@
+
+GET https://api.football-data.org/v4/matches?dateFrom=2025-05-06&dateTo=2025-05-13&competitions=2021
+X-Auth-Token: 406a8f59a8544162beb92adb92b738dd
