@@ -23,19 +23,15 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="dashboard.html">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active text-primary" aria-current="page" href="trending.html">Trending</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="matches.html">Matches</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link text-light" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active text-primary" href="trending.html" aria-current="page">Trending</a></li>
+                    <li class="nav-item"><a class="nav-link text-light"
+                            href="matches.html">Matches</a></li>
                 </ul>
             </div>
             <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-link text-light p-1" data-bs-toggle="tooltip" title="Buscar">
+                <button class="btn btn-link text-light p-1" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch" title="Buscar Equipo">
                     <i class="bi bi-search fs-5"></i>
                 </button>
                 <div class="dropdown">
@@ -45,24 +41,16 @@
                         <i class="bi bi-person fs-5"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownUserButton">
-                        <li>
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userModal">
-                                <i class="bi bi-gear me-2"></i>Configuración
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                                data-bs-target="#confirmDeleteModal">
-                                <i class="bi bi-trash me-2"></i>Eliminar Cuenta
-                            </a>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userModal"><i
+                                    class="bi bi-gear me-2"></i>Configuración</a></li>
+                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeleteModal"><i class="bi bi-trash me-2"></i>Eliminar Cuenta</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="login.html"> <i
-                                    class="bi bi-box-arrow-right me-2"></i>Logout</a>
-                        </li>
+                        <li><a class="dropdown-item" href="login.html"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -73,14 +61,18 @@
         <div class="container">
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                    <h2 class="h3 mb-0 text-light">Partidos <span class="text-primary">Destacados</span></h2>
+                    <h2 class="h3 mb-0 text-light">Trending <span class="text-primary">Matches</span></h2>
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-filter me-1"></i>Filtrar Liga
+                            <i class="bi bi-filter me-1"></i>Filter
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><button class="dropdown-item" type="button">Todas</button></li>
+                            <li><button class="dropdown-item" type="button">Favorites</button></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><button class="dropdown-item" type="button">All</button></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -96,11 +88,9 @@
                 <div class="d-flex gap-2 pb-2 filter-container">
                     <button class="btn btn-primary rounded-pill px-3 btn-sm flex-shrink-0">Todos</button>
                     <button class="btn btn-outline-light rounded-pill px-3 btn-sm flex-shrink-0"> <i
-                            class="bi bi-circle-fill me-1 small"></i>Fútbol</button>
+                            class="bi bi-circle-fill me-1 small"></i>Futbol</button>
                     <button class="btn btn-outline-light rounded-pill px-3 btn-sm flex-shrink-0"> <i
-                            class="bi bi-dribbble me-1"></i>Baloncesto</button> <button
-                        class="btn btn-outline-light rounded-pill px-3 btn-sm flex-shrink-0"> <i
-                            class="bi bi-baseball me-1"></i>Béisbol</button>
+                            class="bi bi-dribbble me-1"></i>Basketball</button>
                 </div>
             </div>
 
@@ -127,7 +117,7 @@
                                 </div>
                             </div>
                             <h4 class="match-score">2 - 1</h4>
-                            <small class="match-status">Minuto: 75'</small>
+                            <small class="match-status">Minute: 75'</small>
                         </div>
                     </div>
                 </div>
@@ -153,7 +143,7 @@
                                 </div>
                             </div>
                             <h4 class="match-score">105 - 108</h4>
-                            <small class="match-status">4to Cuarto - 2:30</small>
+                            <small class="match-status">4to Quarter - 2:30</small>
                         </div>
                     </div>
                 </div>
@@ -163,7 +153,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <span class="badge bg-warning text-dark rounded-pill">Serie A</span>
                             <small class="text-warning fw-bold"><i class="bi bi-clock-history me-1"></i>
-                                Programado</small>
+                                Next</small>
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-around align-items-center mb-3">
@@ -180,7 +170,7 @@
                                 </div>
                             </div>
                             <h4 class="match-score text-muted">-- : --</h4>
-                            <small class="match-status">Mañana, 19:00</small>
+                            <small class="match-status">Tomorrow, 19:00</small>
                         </div>
                     </div>
                 </div>
