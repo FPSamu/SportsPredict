@@ -1,3 +1,2 @@
-
-GET https://api.football-data.org/v4/matches?dateFrom=2025-05-06&dateTo=2025-05-13&competitions=2021
-X-Auth-Token: 406a8f59a8544162beb92adb92b738dd
+GET https://api.balldontlie.io/v1/stats?game_ids[]=1038756&per_page=5
+Authorization: e4591bbb-6b51-4267-95a0-489dc4eaef2d
