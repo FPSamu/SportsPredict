@@ -1,44 +1,44 @@
 <!DOCTYPE html>
-<html lang="es"> <head>
+<html lang="es">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partidos - AI Sports Predictions</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles/matches-style.css">
     <link rel="stylesheet" href="../assets/styles/dashboard-style.css">
 </head>
 
 <body class="bg-dark text-light">
+
     <nav class="navbar bg-dark navbar-expand-lg fixed-top shadow-sm">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list text-light fs-4"></i>
             </button>
-            <a class="navbar-brand fw-bold text-light" href="dashboard.html"> <span class="text-primary">My</span>App
+            <a class="navbar-brand fw-bold text-light" href="dashboard.html">
+                <span class="text-primary">My</span>App
             </a>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="dashboard.html">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Trending</a> </li>
-                    <li class="nav-item">
-                        <a class="nav-link active text-light" aria-current="page" href="matches.html">Matches</a>
-                    </li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link text-light" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="trending.html">Trending</a></li>
+                    <li class="nav-item"><a class="nav-link active text-primary" aria-current="page" href="matches.html">Matches</a></li>
                 </ul>
             </div>
             <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-link text-light p-1" data-bs-toggle="tooltip" title="Buscar">
+                 <button class="btn btn-link text-light p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch" title="Buscar Equipo">
                     <i class="bi bi-search fs-5"></i>
                 </button>
                 <div class="dropdown">
-                    <button class="btn btn-primary rounded-circle" type="button" id="dropdownUserButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person"></i>
+                    <button class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center" type="button" id="dropdownUserButton" data-bs-toggle="dropdown" aria-expanded="false" style="width: 40px; height: 40px;">
+                        <i class="bi bi-person fs-5"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownUserButton">
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userModal"><i class="bi bi-gear me-2"></i>Configuración</a></li>
-                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"><i class="bi bi-trash me-2"></i>Eliminar</a></li>
+                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"><i class="bi bi-trash me-2"></i>Eliminar Cuenta</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                     </ul>
@@ -46,274 +46,190 @@
             </div>
         </div>
     </nav>
-
-    <section class="py-5 bg-dark mt-5">
+    <div class="offcanvas offcanvas-top bg-dark text-light" tabindex="-1" id="offcanvasSearch" aria-labelledby="offcanvasSearchLabel" style="--bs-offcanvas-height: auto; max-height: 80vh;">
+      <div class="offcanvas-header border-bottom border-secondary">
+        <h5 class="offcanvas-title" id="offcanvasSearchLabel"><i class="bi bi-search me-2"></i>Buscar Equipo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="mb-3"><input type="search" class="form-control form-control-dark" id="teamSearchInput" placeholder="Escribe el nombre de un equipo..."></div>
+        <div id="searchResults" class="list-group list-group-flush search-results-container"></div>
+      </div>
+    </div>
+    <main class="py-4 py-md-5 bg-dark mt-5">
         <div class="container">
-            <h1 class="display-5 fw-bold mb-4 text-light text-center">
+            <h1 class="display-5 fw-bold mb-3 text-light text-center">
                 Calendario de <span class="text-primary">Partidos</span>
             </h1>
 
+             <div class="d-flex justify-content-end mb-3">
+                 <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-filter me-1"></i>Filtrar
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><button class="dropdown-item" type="button"><i class="bi bi-star-fill me-2 text-warning"></i>Favoritos</button></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><button class="dropdown-item active" type="button">Todos</button></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><button class="dropdown-item" type="button">Premier League</button></li>
+                        <li><button class="dropdown-item" type="button">La Liga</button></li>
+                        <li><button class="dropdown-item" type="button">Serie A</button></li>
+                        <li><button class="dropdown-item" type="button">NBA</button></li>
+                        <li><button class="dropdown-item" type="button">Champions League</button></li>
+                    </ul>
+                </div>
+            </div>
             <div class="date-nav-container mb-4 pb-2">
-                <ul class="nav nav-pills justify-content-center date-nav" id="dateTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-04-24-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-24" type="button" role="tab" aria-controls="date-2025-04-24" aria-selected="false">Jue 24 Abr</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-04-25-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-25" type="button" role="tab" aria-controls="date-2025-04-25" aria-selected="false">Vie 25 Abr</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-04-26-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-26" type="button" role="tab" aria-controls="date-2025-04-26" aria-selected="false">Sáb 26 Abr</button>
-                    </li>
-                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-04-27-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-27" type="button" role="tab" aria-controls="date-2025-04-27" aria-selected="false">Dom 27 Abr</button>
-                    </li>
-                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-04-28-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-28" type="button" role="tab" aria-controls="date-2025-04-28" aria-selected="false">Lun 28 Abr</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="date-2025-04-29-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-29" type="button" role="tab" aria-controls="date-2025-04-29" aria-selected="true">Hoy 29 Abr</button>
-                    </li>
-                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-04-30-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-30" type="button" role="tab" aria-controls="date-2025-04-30" aria-selected="false">Mié 30 Abr</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-05-01-tab" data-bs-toggle="pill" data-bs-target="#date-2025-05-01" type="button" role="tab" aria-controls="date-2025-05-01" aria-selected="false">Jue 01 May</button>
-                    </li>
-                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-05-02-tab" data-bs-toggle="pill" data-bs-target="#date-2025-05-02" type="button" role="tab" aria-controls="date-2025-05-02" aria-selected="false">Vie 02 May</button>
-                    </li>
-                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-05-03-tab" data-bs-toggle="pill" data-bs-target="#date-2025-05-03" type="button" role="tab" aria-controls="date-2025-05-03" aria-selected="false">Sáb 03 May</button>
-                    </li>
-                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="date-2025-05-04-tab" data-bs-toggle="pill" data-bs-target="#date-2025-05-04" type="button" role="tab" aria-controls="date-2025-05-04" aria-selected="false">Dom 04 May</button>
-                    </li>
-                </ul>
+                <ul class="nav nav-pills date-nav" id="dateTab" role="tablist">
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-04-24-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-24" type="button" role="tab" aria-controls="date-2025-04-24" aria-selected="false">Jue 24 Abr</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-04-25-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-25" type="button" role="tab" aria-controls="date-2025-04-25" aria-selected="false">Vie 25 Abr</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-04-26-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-26" type="button" role="tab" aria-controls="date-2025-04-26" aria-selected="false">Sáb 26 Abr</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-04-27-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-27" type="button" role="tab" aria-controls="date-2025-04-27" aria-selected="false">Dom 27 Abr</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-04-28-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-28" type="button" role="tab" aria-controls="date-2025-04-28" aria-selected="false">Lun 28 Abr</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="date-2025-04-29-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-29" type="button" role="tab" aria-controls="date-2025-04-29" aria-selected="true">Hoy 29 Abr</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-04-30-tab" data-bs-toggle="pill" data-bs-target="#date-2025-04-30" type="button" role="tab" aria-controls="date-2025-04-30" aria-selected="false">Mié 30 Abr</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-05-01-tab" data-bs-toggle="pill" data-bs-target="#date-2025-05-01" type="button" role="tab" aria-controls="date-2025-05-01" aria-selected="false">Jue 01 May</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-05-02-tab" data-bs-toggle="pill" data-bs-target="#date-2025-05-02" type="button" role="tab" aria-controls="date-2025-05-02" aria-selected="false">Vie 02 May</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-05-03-tab" data-bs-toggle="pill" data-bs-target="#date-2025-05-03" type="button" role="tab" aria-controls="date-2025-05-03" aria-selected="false">Sáb 03 May</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="date-2025-05-04-tab" data-bs-toggle="pill" data-bs-target="#date-2025-05-04" type="button" role="tab" aria-controls="date-2025-05-04" aria-selected="false">Dom 04 May</button></li>
+                 </ul>
             </div>
 
             <div class="tab-content" id="dateTabContent">
+
                 <div class="tab-pane fade" id="date-2025-04-24" role="tabpanel" aria-labelledby="date-2025-04-24-tab">
                    <h3 class="text-center text-primary mb-4">Jueves, 24 de Abril 2025</h3>
                    <div class="row g-3">
                        <div class="col-md-6">
-                            <div class="card bg-secondary text-light match-card">
-                               <div class="card-header d-flex justify-content-between align-items-center">
-                                   <span><i class="bi bi-circle-fill me-2"></i>LaLiga</span>
-                                   <span class="status-finished">Finalizado</span>
-                               </div>
+                            <div class="card bg-dark text-light match-card hover-card">
+                               <div class="card-header d-flex justify-content-between align-items-center"><span><i class="bi bi-circle-fill me-2"></i>LaLiga</span><span class="status-finished">Finalizado</span></div>
                                <div class="card-body">
-                                   <div class="row align-items-center">
-                                       <div class="col-5 text-end">
-                                            <div class="team-info justify-content-end">
-                                                <span class="team-name">Sevilla</span>
-                                                <img src="https://a.espncdn.com/i/teamlogos/soccer/500/90.png" class="rounded-circle team-logo bg-light p-1" alt="Sevilla">
-                                            </div>
-                                       </div>
+                                   <div class="row align-items-center gx-2">
+                                       <div class="col-5 text-end"><div class="team-info justify-content-end"><span class="team-name">Sevilla</span><img src="https://a.espncdn.com/i/teamlogos/soccer/500/90.png" class="rounded-circle team-logo p-1" alt="Sevilla"></div></div>
                                        <div class="col-2 match-score">1 - 3</div>
-                                       <div class="col-5">
-                                            <div class="team-info">
-                                                 <img src="https://a.espncdn.com/i/teamlogos/soccer/500/94.png" class="rounded-circle team-logo bg-light p-1" alt="Valencia">
-                                                <span class="team-name">Valencia</span>
-                                            </div>
-                                       </div>
+                                       <div class="col-5"><div class="team-info"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/94.png" class="rounded-circle team-logo p-1" alt="Valencia"><span class="team-name">Valencia</span></div></div>
                                    </div>
                                </div>
                             </div>
                        </div>
                        <div class="col-md-6">
-                            <div class="card bg-secondary text-light match-card">
-                               <div class="card-header d-flex justify-content-between align-items-center">
-                                   <span><i class="bi bi-dribbble me-2"></i>NBA Playoffs</span>
-                                   <span class="status-finished">Finalizado</span>
-                               </div>
+                            <div class="card bg-dark text-light match-card hover-card">
+                               <div class="card-header d-flex justify-content-between align-items-center"><span><i class="bi bi-dribbble me-2"></i>NBA Playoffs</span><span class="status-finished">Finalizado</span></div>
                                <div class="card-body">
-                                   <div class="row align-items-center">
-                                       <div class="col-5 text-end">
-                                            <div class="team-info justify-content-end">
-                                                <span class="team-name">Warriors</span>
-                                                <img src="https://a.espncdn.com/i/teamlogos/nba/500/gsw.png" class="rounded-circle team-logo bg-light p-1" alt="Warriors">
-                                            </div>
-                                       </div>
+                                   <div class="row align-items-center gx-2">
+                                       <div class="col-5 text-end"><div class="team-info justify-content-end"><span class="team-name">Warriors</span><img src="https://a.espncdn.com/i/teamlogos/nba/500/gsw.png" class="rounded-circle team-logo p-1" alt="Warriors"></div></div>
                                        <div class="col-2 match-score">118 - 105</div>
-                                       <div class="col-5">
-                                            <div class="team-info">
-                                                 <img src="https://a.espncdn.com/i/teamlogos/nba/500/den.png" class="rounded-circle team-logo bg-light p-1" alt="Nuggets">
-                                                <span class="team-name">Nuggets</span>
-                                            </div>
-                                       </div>
+                                       <div class="col-5"><div class="team-info"><img src="https://a.espncdn.com/i/teamlogos/nba/500/den.png" class="rounded-circle team-logo p-1" alt="Nuggets"><span class="team-name">Nuggets</span></div></div>
                                    </div>
                                </div>
                             </div>
                        </div>
-                       </div>
+                   </div>
                 </div>
 
-                 <div class="tab-pane fade" id="date-2025-04-25" role="tabpanel" aria-labelledby="date-2025-04-25-tab">
+                <div class="tab-pane fade" id="date-2025-04-25" role="tabpanel" aria-labelledby="date-2025-04-25-tab">
                      <h3 class="text-center text-primary mb-4">Viernes, 25 de Abril 2025</h3>
-                     <p class="text-center text-muted">No hay partidos programados para este día (ejemplo).</p>
-                     </div>
+                     <div class="text-center p-5 no-matches-placeholder"> <i class="bi bi-calendar-x fs-1 text-muted mb-3"></i><p class="text-muted mb-0">No hay partidos programados para este día.</p></div>
+                 </div>
 
-                 <div class="tab-pane fade" id="date-2025-04-26" role="tabpanel" aria-labelledby="date-2025-04-26-tab">
+                <div class="tab-pane fade" id="date-2025-04-26" role="tabpanel" aria-labelledby="date-2025-04-26-tab">
                    <h3 class="text-center text-primary mb-4">Sábado, 26 de Abril 2025</h3>
                    <div class="row g-3">
                        <div class="col-md-6">
-                            <div class="card bg-secondary text-light match-card">
-                               <div class="card-header d-flex justify-content-between align-items-center">
-                                   <span><i class="bi bi-circle-fill me-2"></i>Premier League</span>
-                                   <span class="status-finished">Finalizado</span>
-                               </div>
+                            <div class="card bg-dark text-light match-card hover-card">
+                               <div class="card-header d-flex justify-content-between align-items-center"><span><i class="bi bi-circle-fill me-2"></i>Premier League</span><span class="status-finished">Finalizado</span></div>
                                <div class="card-body">
-                                   <div class="row align-items-center">
-                                       <div class="col-5 text-end">
-                                            <div class="team-info justify-content-end">
-                                                <span class="team-name">Arsenal</span>
-                                                <img src="https://a.espncdn.com/i/teamlogos/soccer/500/359.png" class="rounded-circle team-logo bg-light p-1" alt="Arsenal">
-                                            </div>
-                                       </div>
+                                   <div class="row align-items-center gx-2">
+                                       <div class="col-5 text-end"><div class="team-info justify-content-end"><span class="team-name">Arsenal</span><img src="https://a.espncdn.com/i/teamlogos/soccer/500/359.png" class="rounded-circle team-logo p-1" alt="Arsenal"></div></div>
                                        <div class="col-2 match-score">2 - 2</div>
-                                       <div class="col-5">
-                                            <div class="team-info">
-                                                 <img src="https://a.espncdn.com/i/teamlogos/soccer/500/360.png" class="rounded-circle team-logo bg-light p-1" alt="Man Utd">
-                                                <span class="team-name">Man Utd</span>
-                                            </div>
-                                       </div>
+                                       <div class="col-5"><div class="team-info"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/360.png" class="rounded-circle team-logo p-1" alt="Man Utd"><span class="team-name">Man Utd</span></div></div>
                                    </div>
                                </div>
                             </div>
                        </div>
-                       </div>
+                   </div>
                 </div>
 
                 <div class="tab-pane fade" id="date-2025-04-27" role="tabpanel" aria-labelledby="date-2025-04-27-tab">
                    <h3 class="text-center text-primary mb-4">Domingo, 27 de Abril 2025</h3>
-                     <p class="text-center text-muted">No hay partidos programados para este día (ejemplo).</p>
+                     <div class="text-center p-5 no-matches-placeholder"><i class="bi bi-calendar-x fs-1 text-muted mb-3"></i><p class="text-muted mb-0">No hay partidos programados para este día.</p></div>
                 </div>
 
                 <div class="tab-pane fade" id="date-2025-04-28" role="tabpanel" aria-labelledby="date-2025-04-28-tab">
                      <h3 class="text-center text-primary mb-4">Lunes, 28 de Abril 2025</h3>
-                     <p class="text-center text-muted">No hay partidos programados para este día (ejemplo).</p>
+                     <div class="text-center p-5 no-matches-placeholder"><i class="bi bi-calendar-x fs-1 text-muted mb-3"></i><p class="text-muted mb-0">No hay partidos programados para este día.</p></div>
                 </div>
 
                 <div class="tab-pane fade show active" id="date-2025-04-29" role="tabpanel" aria-labelledby="date-2025-04-29-tab">
                     <h3 class="text-center text-primary mb-4">Martes, 29 de Abril 2025 (Hoy)</h3>
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <div class="card bg-secondary text-light match-card">
-                               <div class="card-header d-flex justify-content-between align-items-center">
-                                   <span><i class="bi bi-circle-fill me-2"></i>Champions League</span>
-                                   <span class="status-live"><i class="bi bi-broadcast-pin me-1"></i>En Vivo - 75'</span>
-                               </div>
+                            <div class="card bg-dark text-light match-card hover-card">
+                               <div class="card-header d-flex justify-content-between align-items-center"><span><i class="bi bi-stars me-2"></i>Champions League</span><span class="status-live"><i class="bi bi-broadcast-pin me-1"></i>En Vivo - 75'</span></div>
                                <div class="card-body">
-                                   <div class="row align-items-center">
-                                       <div class="col-5 text-end">
-                                            <div class="team-info justify-content-end">
-                                                <span class="team-name">Real Madrid</span>
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png" class="rounded-circle team-logo bg-light p-1" alt="Real Madrid">
-                                            </div>
-                                       </div>
+                                   <div class="row align-items-center gx-2">
+                                       <div class="col-5 text-end"><div class="team-info justify-content-end"><span class="team-name">Real Madrid</span><img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png" class="rounded-circle team-logo p-1" alt="Real Madrid"></div></div>
                                        <div class="col-2 match-score">2 - 1</div>
-                                       <div class="col-5">
-                                            <div class="team-info">
-                                                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/1200px-Manchester_City_FC_badge.svg.png" class="rounded-circle team-logo bg-light p-1" alt="Man City">
-                                                <span class="team-name">Man City</span>
-                                            </div>
-                                       </div>
+                                       <div class="col-5"><div class="team-info"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/1200px-Manchester_City_FC_badge.svg.png" class="rounded-circle team-logo p-1" alt="Man City"><span class="team-name">Man City</span></div></div>
                                    </div>
                                </div>
                             </div>
                        </div>
                        <div class="col-md-6">
-                            <div class="card bg-secondary text-light match-card">
-                               <div class="card-header d-flex justify-content-between align-items-center">
-                                   <span><i class="bi bi-dribbble me-2"></i>NBA</span>
-                                   <span class="status-scheduled">21:30</span> </div>
+                            <div class="card bg-dark text-light match-card hover-card">
+                               <div class="card-header d-flex justify-content-between align-items-center"><span><i class="bi bi-dribbble me-2"></i>NBA</span><span class="status-scheduled">21:30</span></div>
                                <div class="card-body">
-                                   <div class="row align-items-center">
-                                       <div class="col-5 text-end">
-                                            <div class="team-info justify-content-end">
-                                                <span class="team-name">Lakers</span>
-                                                <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/lal.png&h=200&w=200" class="rounded-circle team-logo bg-light p-1" alt="Lakers">
-                                            </div>
-                                       </div>
-                                       <div class="col-2 text-center text-muted fw-bold">VS</div>
-                                       <div class="col-5">
-                                            <div class="team-info">
-                                                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Boston_Celtics.svg/800px-Boston_Celtics.svg.png" class="rounded-circle team-logo bg-light p-1" alt="Celtics">
-                                                <span class="team-name">Celtics</span>
-                                            </div>
-                                       </div>
+                                   <div class="row align-items-center gx-2">
+                                       <div class="col-5 text-end"><div class="team-info justify-content-end"><span class="team-name">Lakers</span><img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/lal.png&h=200&w=200" class="rounded-circle team-logo p-1" alt="Lakers"></div></div>
+                                       <div class="col-2 text-center text-muted fw-bold small">VS</div>
+                                       <div class="col-5"><div class="team-info"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Boston_Celtics.svg/800px-Boston_Celtics.svg.png" class="rounded-circle team-logo p-1" alt="Celtics"><span class="team-name">Celtics</span></div></div>
                                    </div>
                                </div>
                             </div>
                        </div>
-                        </div>
+                    </div>
                 </div>
 
-                 <div class="tab-pane fade" id="date-2025-04-30" role="tabpanel" aria-labelledby="date-2025-04-30-tab">
+                <div class="tab-pane fade" id="date-2025-04-30" role="tabpanel" aria-labelledby="date-2025-04-30-tab">
                     <h3 class="text-center text-primary mb-4">Miércoles, 30 de Abril 2025</h3>
                      <div class="row g-3">
                        <div class="col-md-6">
-                            <div class="card bg-secondary text-light match-card">
-                               <div class="card-header d-flex justify-content-between align-items-center">
-                                   <span><i class="bi bi-circle-fill me-2"></i>Champions League</span>
-                                   <span class="status-scheduled">20:00</span>
-                               </div>
+                            <div class="card bg-dark text-light match-card hover-card">
+                               <div class="card-header d-flex justify-content-between align-items-center"><span><i class="bi bi-stars me-2"></i>Champions League</span><span class="status-scheduled">20:00</span></div>
                                <div class="card-body">
-                                   <div class="row align-items-center">
-                                       <div class="col-5 text-end">
-                                            <div class="team-info justify-content-end">
-                                                <span class="team-name">Bayern M.</span>
-                                                <img src="https://a.espncdn.com/i/teamlogos/soccer/500/132.png" class="rounded-circle team-logo bg-light p-1" alt="Bayern">
-                                            </div>
-                                       </div>
-                                       <div class="col-2 text-center text-muted fw-bold">VS</div>
-                                       <div class="col-5">
-                                            <div class="team-info">
-                                                 <img src="https://a.espncdn.com/i/teamlogos/soccer/500/83.png" class="rounded-circle team-logo bg-light p-1" alt="Barcelona">
-                                                <span class="team-name">Barcelona</span>
-                                            </div>
-                                       </div>
+                                   <div class="row align-items-center gx-2">
+                                       <div class="col-5 text-end"><div class="team-info justify-content-end"><span class="team-name">Bayern M.</span><img src="https://a.espncdn.com/i/teamlogos/soccer/500/132.png" class="rounded-circle team-logo p-1" alt="Bayern"></div></div>
+                                       <div class="col-2 text-center text-muted fw-bold small">VS</div>
+                                       <div class="col-5"><div class="team-info"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/83.png" class="rounded-circle team-logo p-1" alt="Barcelona"><span class="team-name">Barcelona</span></div></div>
                                    </div>
                                </div>
                             </div>
                        </div>
-                        </div>
+                    </div>
                 </div>
 
-                 <div class="tab-pane fade" id="date-2025-05-01" role="tabpanel" aria-labelledby="date-2025-05-01-tab">
+                <div class="tab-pane fade" id="date-2025-05-01" role="tabpanel" aria-labelledby="date-2025-05-01-tab">
                    <h3 class="text-center text-primary mb-4">Jueves, 01 de Mayo 2025</h3>
-                    <p class="text-center text-muted">No hay partidos programados para este día (ejemplo).</p>
+                   <div class="text-center p-5 no-matches-placeholder"><i class="bi bi-calendar-x fs-1 text-muted mb-3"></i><p class="text-muted mb-0">No hay partidos programados para este día.</p></div>
                  </div>
 
                 <div class="tab-pane fade" id="date-2025-05-02" role="tabpanel" aria-labelledby="date-2025-05-02-tab">
                     <h3 class="text-center text-primary mb-4">Viernes, 02 de Mayo 2025</h3>
-                     <p class="text-center text-muted">No hay partidos programados para este día (ejemplo).</p>
+                    <div class="text-center p-5 no-matches-placeholder"><i class="bi bi-calendar-x fs-1 text-muted mb-3"></i><p class="text-muted mb-0">No hay partidos programados para este día.</p></div>
                  </div>
 
                  <div class="tab-pane fade" id="date-2025-05-03" role="tabpanel" aria-labelledby="date-2025-05-03-tab">
                      <h3 class="text-center text-primary mb-4">Sábado, 03 de Mayo 2025</h3>
                       <div class="row g-3">
                        <div class="col-md-6">
-                            <div class="card bg-secondary text-light match-card">
-                               <div class="card-header d-flex justify-content-between align-items-center">
-                                   <span><i class="bi bi-circle-fill me-2"></i>LaLiga</span>
-                                   <span class="status-scheduled">18:00</span>
-                               </div>
+                            <div class="card bg-dark text-light match-card hover-card">
+                               <div class="card-header d-flex justify-content-between align-items-center"><span><i class="bi bi-circle-fill me-2"></i>LaLiga</span><span class="status-scheduled">18:00</span></div>
                                <div class="card-body">
-                                   <div class="row align-items-center">
-                                       <div class="col-5 text-end">
-                                            <div class="team-info justify-content-end">
-                                                <span class="team-name">Atlético</span>
-                                                <img src="https://a.espncdn.com/i/teamlogos/soccer/500/1068.png" class="rounded-circle team-logo bg-light p-1" alt="Atletico">
-                                            </div>
-                                       </div>
-                                       <div class="col-2 text-center text-muted fw-bold">VS</div>
-                                       <div class="col-5">
-                                            <div class="team-info">
-                                                 <img src="https://a.espncdn.com/i/teamlogos/soccer/500/89.png" class="rounded-circle team-logo bg-light p-1" alt="Real Sociedad">
-                                                <span class="team-name">R. Sociedad</span>
-                                            </div>
-                                       </div>
+                                   <div class="row align-items-center gx-2">
+                                       <div class="col-5 text-end"><div class="team-info justify-content-end"><span class="team-name">Atlético</span><img src="https://a.espncdn.com/i/teamlogos/soccer/500/1068.png" class="rounded-circle team-logo p-1" alt="Atletico"></div></div>
+                                       <div class="col-2 text-center text-muted fw-bold small">VS</div>
+                                       <div class="col-5"><div class="team-info"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/89.png" class="rounded-circle team-logo p-1" alt="Real Sociedad"><span class="team-name">R. Sociedad</span></div></div>
                                    </div>
                                </div>
                             </div>
@@ -323,77 +239,186 @@
 
                  <div class="tab-pane fade" id="date-2025-05-04" role="tabpanel" aria-labelledby="date-2025-05-04-tab">
                     <h3 class="text-center text-primary mb-4">Domingo, 04 de Mayo 2025</h3>
-                     <p class="text-center text-muted">No hay partidos programados para este día (ejemplo).</p>
+                    <div class="text-center p-5 no-matches-placeholder"><i class="bi bi-calendar-x fs-1 text-muted mb-3"></i><p class="text-muted mb-0">No hay partidos programados para este día.</p></div>
                  </div>
 
-            </div> </div> </section>
-
-    <footer class="bg-dark mt-auto py-4 border-top border-secondary"> <div class="container">
-            <div class="row align-items-center mb-3">
-                <div class="col-md-6 mb-2 mb-md-0 text-center text-md-start">
-                    <span class="fw-bold text-light"><span class="text-primary">My</span>App</span>
-                </div>
+            </div> </div> </main> <footer class="bg-dark py-4 border-top border-secondary">
+        <div class="container">
+            <div class="row align-items-center mb-3 gy-2">
+                <div class="col-md-6 text-center text-md-start"><span class="fw-bold text-light"><span class="text-primary">My</span>App</span></div>
                 <div class="col-md-6">
-                     <nav class="nav justify-content-center justify-content-md-end">
-                        <a class="nav-link text-muted" href="#">About</a>
-                        <a class="nav-link text-muted" href="#">Terms</a>
-                        <a class="nav-link text-muted" href="#">Privacy</a>
-                        <a class="nav-link text-muted" href="#">Contact</a>
+                    <nav class="nav justify-content-center justify-content-md-end">
+                        <a class="nav-link text-muted small" href="#">About</a>
+                        <a class="nav-link text-muted small" href="#">Terms</a>
+                        <a class="nav-link text-muted small" href="#">Privacy</a>
+                        <a class="nav-link text-muted small" href="#">Contact</a>
                     </nav>
                 </div>
             </div>
-            <hr class="border-secondary">
+            <hr class="border-secondary d-none d-md-block">
             <p class="text-center text-muted small mb-0">&copy; 2025 MyApp. All rights reserved.</p>
         </div>
     </footer>
-
     <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-light">
-                <div class="modal-header border-secondary">
-                    <h5 class="modal-title" id="userModalLabel">Editar Perfil</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                <div class="modal-header border-secondary"><h5 class="modal-title" id="userModalLabel"><i class="bi bi-pencil-square me-2"></i>Editar Perfil</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
                 <div class="modal-body">
-                     <form>
-                        <div class="mb-3"><label for="email" class="form-label">Email</label><input type="email" class="form-control" id="email" placeholder="usuario@ejemplo.com" required></div>
-                        <div class="mb-3"><label for="password" class="form-label">Nueva Contraseña (opcional)</label><input type="password" class="form-control" id="password" placeholder="*********"></div>
-                        <div class="mb-3"><label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label><input type="password" class="form-control" id="confirmPassword" placeholder="*********"></div>
-                     </form>
+                    <form>
+                        <div class="mb-3"><label for="matches-email" class="form-label">Email</label><input type="email" class="form-control form-control-dark" id="matches-email" placeholder="usuario@ejemplo.com" required></div>
+                        <div class="mb-3"><label for="matches-password" class="form-label">Nueva Contraseña (opcional)</label><input type="password" class="form-control form-control-dark" id="matches-password" placeholder="Deja en blanco para no cambiar"></div>
+                        <div class="mb-3"><label for="matches-confirmPassword" class="form-label">Confirmar Nueva Contraseña</label><input type="password" class="form-control form-control-dark" id="matches-confirmPassword" placeholder="Repite la nueva contraseña"></div>
+                    </form>
                 </div>
-                <div class="modal-footer border-secondary">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                </div>
+                <div class="modal-footer border-secondary"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-2"></i>Guardar Cambios</button></div>
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content bg-dark text-light">
-                <div class="modal-header border-danger">
-                    <h5 class="modal-title text-danger" id="confirmDeleteModalLabel"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar Eliminación</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>¿Estás seguro de que quieres eliminar tu cuenta?</p>
-                    <p class="text-danger fw-bold">¡Esta acción no se puede deshacer!</p>
-                </div>
-                <div class="modal-footer border-secondary">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger">Sí, Eliminar Mi Cuenta</button>
-                </div>
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header border-danger border-2"><h5 class="modal-title text-danger" id="confirmDeleteModalLabel"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar Eliminación</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body"><p>¿Estás seguro de que quieres eliminar tu cuenta permanentemente?</p><p class="text-danger fw-bold">¡Esta acción no se puede deshacer!</p></div>
+                <div class="modal-footer border-secondary"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger"><i class="bi bi-trash-fill me-2"></i>Sí, Eliminar Mi Cuenta</button></div>
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // Initialize tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+        // --- Funcionalidad de Búsqueda y Favoritos (COPIAR EL MISMO JS AQUÍ) ---
+
+        // Datos de ejemplo (Reemplazar con datos reales/API)
+        const allTeams = [
+            { id: 1, name: 'Real Madrid' }, { id: 2, name: 'Barcelona' }, { id: 3, name: 'Atlético Madrid' },
+            { id: 4, name: 'Sevilla' }, { id: 5, name: 'Valencia' }, { id: 6, name: 'Real Sociedad' },
+            { id: 7, name: 'Athletic Club' }, { id: 8, name: 'Villarreal' }, { id: 9, name: 'Manchester City' },
+            { id: 10, name: 'Liverpool' }, { id: 11, name: 'Manchester United' }, { id: 12, name: 'Chelsea' },
+            { id: 13, name: 'Arsenal' }, { id: 14, name: 'Tottenham Hotspur' }, { id: 15, name: 'Juventus' },
+            { id: 16, name: 'Inter Milan' }, { id: 17, name: 'AC Milan' }, { id: 18, name: 'Napoli' },
+            { id: 19, name: 'Bayern Munich' }, { id: 20, name: 'Borussia Dortmund' }, { id: 21, name: 'Paris Saint-Germain' },
+            { id: 22, name: 'Los Angeles Lakers' }, { id: 23, name: 'Golden State Warriors' }, { id: 24, name: 'Boston Celtics' },
+            { id: 25, name: 'Brooklyn Nets' }
+            // ... agregar más equipos
+        ];
+
+        // Estado de favoritos (Usar localStorage o BBDD para persistencia)
+        let favoriteTeams = new Set(JSON.parse(localStorage.getItem('favoriteTeamsMyApp')) || ['Real Madrid', 'Liverpool']);
+
+        function saveFavorites() {
+            localStorage.setItem('favoriteTeamsMyApp', JSON.stringify(Array.from(favoriteTeams)));
+        }
+
+        // Elementos del DOM (asegurarse que existan)
+        const searchInput = document.getElementById('teamSearchInput');
+        const resultsContainer = document.getElementById('searchResults');
+        const searchOffcanvasElement = document.getElementById('offcanvasSearch');
+        let searchOffcanvas = null; // Inicializar a null
+        if (searchOffcanvasElement) { // Verificar si existe el elemento
+             searchOffcanvas = bootstrap.Offcanvas.getInstance(searchOffcanvasElement) || new bootstrap.Offcanvas(searchOffcanvasElement);
+        }
+
+        // Función para renderizar los resultados
+        function renderResults(teamsToRender) {
+            if (!resultsContainer) return; // Salir si no existe
+
+            resultsContainer.innerHTML = '';
+            if (searchInput && searchInput.value.trim().length === 0) {
+                 resultsContainer.innerHTML = '<p class="text-muted text-center mt-3 px-2">Empieza a escribir para buscar un equipo...</p>';
+                 return;
+            }
+            if (teamsToRender.length === 0) {
+                resultsContainer.innerHTML = '<p class="text-muted text-center mt-3 px-2">No se encontraron equipos que coincidan.</p>';
+                return;
+            }
+
+            teamsToRender.forEach(team => {
+                const isFavorite = favoriteTeams.has(team.name);
+                const starClass = isFavorite ? 'bi-star-fill' : 'bi-star';
+                const starTitle = isFavorite ? 'Quitar favorito' : 'Marcar como favorito';
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'list-group-item list-group-item-action list-group-item-dark d-flex justify-content-between align-items-center py-2 px-0';
+                itemDiv.innerHTML = `
+                    <span role="button" class="team-name-result ms-2 flex-grow-1" data-team-name="${team.name}">${team.name}</span>
+                    <button class="btn btn-sm btn-link text-warning p-0 me-2 favorite-btn" data-team-name="${team.name}" title="${starTitle}">
+                        <i class="bi ${starClass} fs-5"></i>
+                    </button>
+                `;
+                resultsContainer.appendChild(itemDiv);
+            });
+        }
+
+        // Event Listener para el input de búsqueda (con debounce)
+        let searchTimeout;
+         if (searchInput) {
+             searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const searchTerm = searchInput.value.trim().toLowerCase();
+                    if (searchTerm.length > 0) {
+                        const filteredTeams = allTeams.filter(team =>
+                            team.name.toLowerCase().includes(searchTerm)
+                        );
+                        renderResults(filteredTeams);
+                    } else {
+                        renderResults([]);
+                    }
+                }, 250);
+            });
+         }
+
+        // Event Listener para los botones de favorito y nombre de equipo (Delegación)
+         if (resultsContainer) {
+             resultsContainer.addEventListener('click', (event) => {
+                const favoriteButton = event.target.closest('.favorite-btn');
+                const teamNameSpan = event.target.closest('.team-name-result');
+
+                if (favoriteButton) {
+                    const teamName = favoriteButton.dataset.teamName;
+                    const starIcon = favoriteButton.querySelector('i');
+                    const isCurrentlyFavorite = starIcon.classList.contains('bi-star-fill');
+
+                    if (isCurrentlyFavorite) {
+                        favoriteTeams.delete(teamName);
+                        starIcon.classList.replace('bi-star-fill', 'bi-star');
+                        favoriteButton.title = 'Marcar como favorito';
+                    } else {
+                        favoriteTeams.add(teamName);
+                        starIcon.classList.replace('bi-star', 'bi-star-fill');
+                        favoriteButton.title = 'Quitar favorito';
+                    }
+                    saveFavorites();
+                    console.log('Equipos Favoritos:', Array.from(favoriteTeams));
+
+                } else if (teamNameSpan) {
+                     const teamName = teamNameSpan.dataset.teamName;
+                     console.log(`Clic en el equipo: ${teamName}`);
+                     alert(`Has hecho clic en: ${teamName}\n(Aquí podrías redirigir)`);
+                     // if(searchOffcanvas) searchOffcanvas.hide(); // Opcional
+                }
+            });
+         }
+
+        // Event Listeners para el Offcanvas
+         if(searchOffcanvasElement) {
+             searchOffcanvasElement.addEventListener('shown.bs.offcanvas', () => {
+                 if(searchInput) searchInput.focus();
+                 renderResults([]);
+             });
+             searchOffcanvasElement.addEventListener('hidden.bs.offcanvas', () => {
+                 if(searchInput) searchInput.value = '';
+                 if(resultsContainer) resultsContainer.innerHTML = '';
+             });
+         }
+
+        // Inicializar Tooltips
+        document.addEventListener('DOMContentLoaded', function () {
+          const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+          const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        });
+
     </script>
+
 </body>
 </html>
