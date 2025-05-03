@@ -1,2 +1,1 @@
-GET https://api.balldontlie.io/v1/stats?game_ids[]=1038756&per_page=5
-Authorization: e4591bbb-6b51-4267-95a0-489dc4eaef2d
+GET https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=Houston%20Rockets
