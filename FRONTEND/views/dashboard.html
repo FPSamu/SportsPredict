@@ -11,35 +11,28 @@
 </head>
 
 <body class="bg-dark text-light">
-
     <nav class="navbar bg-dark navbar-expand-lg fixed-top shadow-sm">
         <div class="container">
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list text-light fs-4"></i>
             </button>
-            <a class="navbar-brand fw-bold text-light" href="#">
-                <span class="text-primary">Stats</span>Predict
+            <a class="navbar-brand fw-bold text-light" href="dashboard.html">
+                <span class="text-primary">My</span>App
             </a>
-
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active text-primary" aria-current="page" href="#">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="trending.html">Trending</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="matches.html">Matches</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active text-primary" aria-current="page" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="trending.html">Trending</a></li>
+                    <li class="nav-item"><a class="nav-link text-light"
+                            href="matches.html">Matches</a></li>
                 </ul>
             </div>
             <div class="d-flex align-items-center gap-3">
-                 <button class="btn btn-link text-light p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch" title="Buscar Equipo">
+                <button class="btn btn-link text-light p-1" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch" title="Buscar Equipo">
                     <i class="bi bi-search fs-5"></i>
                 </button>
-
                 <div class="dropdown">
                     <button class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center"
                         type="button" id="dropdownUserButton" data-bs-toggle="dropdown" aria-expanded="false"
@@ -47,28 +40,22 @@
                         <i class="bi bi-person fs-5"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownUserButton">
-                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userModal"><i class="bi bi-gear me-2"></i>Configuración</a></li>
-                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"><i class="bi bi-trash me-2"></i>Eliminar Cuenta</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="login.html"> <i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userModal"><i
+                                    class="bi bi-gear me-2"></i>Configuración</a></li>
+                        <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeleteModal"><i class="bi bi-trash me-2"></i>Eliminar Cuenta</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="login.html"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
-    <div class="offcanvas offcanvas-top bg-dark text-light" tabindex="-1" id="offcanvasSearch" aria-labelledby="offcanvasSearchLabel" style="--bs-offcanvas-height: auto; max-height: 80vh;">
-      <div class="offcanvas-header border-bottom border-secondary">
-        <h5 class="offcanvas-title" id="offcanvasSearchLabel"><i class="bi bi-search me-2"></i>Buscar Equipo</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <div class="mb-3">
-          <input type="search" class="form-control form-control-dark" id="teamSearchInput" placeholder="Escribe el nombre de un equipo...">
-        </div>
-        <div id="searchResults" class="list-group list-group-flush search-results-container">
-          </div>
-      </div>
-    </div>
+
     <main>
         <section class="py-4 py-md-5 bg-dark mt-5 hero-section">
             <div class="container text-center">
@@ -79,8 +66,11 @@
                     Get data-driven predictions and insights for all your favorite sports
                 </p>
                 <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 hero-buttons">
-                    <a href="matches.html" class="btn btn-primary"> <i class="bi bi-trophy me-2"></i>View Matches</a>
-                    <a href="trending.html" class="btn btn-outline-success"> <i class="bi bi-graph-up me-2"></i>View Trending</a>
+                    <a href="matches.html" class="btn btn-primary"> <i class="bi bi-trophy me-2"></i>View Matches
+                    </a>
+                    <a href="trending.html" class="btn btn-outline-success"> <i class="bi bi-graph-up me-2"></i>View
+                        Trending
+                    </a>
                 </div>
             </div>
         </section>
@@ -91,26 +81,25 @@
                     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                         <h2 class="h3 mb-0 text-light">Top Predictions</h2>
                         <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-funnel me-1"></i>Filters</button>
+                            <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                    class="bi bi-funnel me-1"></i>Filters
+                            </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><button class="dropdown-item" type="button">Favorites</button></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><button class="dropdown-item" type="button">All</button></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><button class="dropdown-item" type="button">Premier League</button></li>
-                                <li><button class="dropdown-item" type="button">La Liga</button></li>
-                                <li><button class="dropdown-item" type="button">Serie A</button></li>
-                                <li><button class="dropdown-item" type="button">NBA</button></li>
-                                <li><button class="dropdown-item" type="button">Champions League</button></li>
+                                <li><a class="dropdown-item" href="#">Today's Games</a></li>
+                                <li><a class="dropdown-item" href="#">High Confidence</a></li>
+                                <li><a class="dropdown-item" href="#">Popular</a></li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="d-flex gap-2 pb-2 filter-buttons">
                         <button class="btn btn-primary rounded-pill px-3 btn-sm flex-shrink-0">All Sports</button>
-                        <button class="btn btn-outline-light rounded-pill px-3 btn-sm flex-shrink-0"> <i class="bi bi-circle-fill me-1 small"></i>Soccer</button>
-                        <button class="btn btn-outline-light rounded-pill px-3 btn-sm flex-shrink-0"> <i class="bi bi-dribbble me-1"></i>Basketball</button>
-                        </div>
+                        <button class="btn btn-outline-light rounded-pill px-3 btn-sm flex-shrink-0"> <i
+                                class="bi bi-circle-fill me-1 small"></i>Soccer</button> <button
+                            class="btn btn-outline-light rounded-pill px-3 btn-sm flex-shrink-0"> <i
+                                class="bi bi-dribbble me-1"></i>Basketball</button>
+                    </div>
                 </div>
 
                 <div class="row g-4" id="main">
@@ -119,67 +108,193 @@
                             <div class="col-md-6">
                                 <div class="card h-100 bg-dark text-light shadow-sm hover-card">
                                     <div class="pt-2 ps-3 d-flex justify-content-between align-items-center">
-                                        <span class="badge bg-secondary rounded-pill">Copa del Rey</span> <small class="pe-3 text-muted">3 hours ago</small>
+                                        <span class="badge bg-secondary rounded-pill">Copa del Rey</span> <small
+                                            class="pe-3 text-muted">3 hours ago</small>
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex justify-content-around align-items-center mb-4">
-                                            <div class="text-center"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/83.png" class="rounded-circle team-logo bg-light p-1" alt="Barcelona"><p class="mt-2 mb-0 fw-medium small">Barcelona</p></div>
+                                            <div class="text-center">
+                                                <img src="https://a.espncdn.com/i/teamlogos/soccer/500/83.png"
+                                                    class="rounded-circle team-logo bg-light p-1" alt="Barcelona">
+                                                <p class="mt-2 mb-0 fw-medium small">Barcelona</p>
+                                            </div>
                                             <div class="text-muted fw-bold small">VS</div>
-                                            <div class="text-center"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png" class="rounded-circle team-logo bg-light p-1" alt="Real Madrid"><p class="mt-2 mb-0 fw-medium small">Real Madrid</p></div>
+                                            <div class="text-center">
+                                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png"
+                                                    class="rounded-circle team-logo bg-light p-1" alt="Real Madrid">
+                                                <p class="mt-2 mb-0 fw-medium small">Real Madrid</p>
+                                            </div>
                                         </div>
                                         <span class="badge bg-primary mb-3 fw-normal">Over/Under Corners</span>
                                         <div class="mb-3">
-                                            <div class="d-flex justify-content-between align-items-center mb-1 small"><span class="fw-medium">Confidence</span> <span>78%</span></div>
-                                            <div class="progress" style="height: 6px;" role="progressbar" aria-label="Confidence 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar bg-success" style="width: 78%"></div></div>
+                                            <div class="d-flex justify-content-between align-items-center mb-1 small">
+                                                <span class="fw-medium">Confidence</span> <span>78%</span>
+                                            </div>
+                                            <div class="progress" style="height: 6px;" role="progressbar"
+                                                aria-label="Confidence 78%" aria-valuenow="78" aria-valuemin="0"
+                                                aria-valuemax="100">
+                                                <div class="progress-bar bg-success" style="width: 78%"></div>
+                                            </div>
                                         </div>
-                                        <p class="fw-medium text-info mb-1"> <i class="bi bi-flag me-1"></i> Over 9.5 </p>
+                                        <p class="fw-medium text-info mb-1"> <i class="bi bi-flag me-1"></i> Over 9.5
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="card h-100 bg-dark text-light shadow-sm hover-card">
                                     <div class="pt-2 ps-3 d-flex justify-content-between align-items-center">
-                                        <span class="badge bg-secondary rounded-pill">Premier League</span><small class="pe-3 text-muted">Tomorrow</small>
+                                        <span class="badge bg-secondary rounded-pill">Premier League</span>
+                                        <small class="pe-3 text-muted">Tomorrow</small>
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex justify-content-around align-items-center mb-4">
-                                            <div class="text-center"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/1200px-Manchester_City_FC_badge.svg.png" class="rounded-circle team-logo bg-light p-1" alt="Man City"><p class="mt-2 mb-0 fw-medium small">Man City</p></div>
+                                            <div class="text-center">
+                                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/1200px-Manchester_City_FC_badge.svg.png"
+                                                    class="rounded-circle team-logo bg-light p-1" alt="Man City">
+                                                <p class="mt-2 mb-0 fw-medium small">Man City</p>
+                                            </div>
                                             <div class="text-muted fw-bold small">VS</div>
-                                            <div class="text-center"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/800px-Liverpool_FC.svg.png" class="rounded-circle team-logo bg-light p-1" alt="Liverpool"><p class="mt-2 mb-0 fw-medium small">Liverpool</p></div>
+                                            <div class="text-center">
+                                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/800px-Liverpool_FC.svg.png"
+                                                    class="rounded-circle team-logo bg-light p-1" alt="Liverpool">
+                                                <p class="mt-2 mb-0 fw-medium small">Liverpool</p>
+                                            </div>
                                         </div>
                                         <span class="badge bg-success mb-3 fw-normal">Over/Under Goals</span>
                                         <div class="mb-3">
-                                            <div class="d-flex justify-content-between align-items-center mb-1 small"><span class="fw-medium">Confidence</span> <span>68%</span></div>
-                                            <div class="progress" style="height: 6px;" role="progressbar" aria-label="Confidence 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar bg-warning" style="width: 68%"></div></div>
+                                            <div class="d-flex justify-content-between align-items-center mb-1 small">
+                                                <span class="fw-medium">Confidence</span> <span>68%</span>
+                                            </div>
+                                            <div class="progress" style="height: 6px;" role="progressbar"
+                                                aria-label="Confidence 68%" aria-valuenow="68" aria-valuemin="0"
+                                                aria-valuemax="100">
+                                                <div class="progress-bar bg-warning" style="width: 68%"></div>
+                                            </div>
                                         </div>
-                                        <p class="fw-medium text-info mb-1"> <i class="bi bi-caret-down-fill me-1"></i> Under 2.5 </p>
+                                        <p class="fw-medium text-info mb-1"> <i class="bi bi-caret-down-fill me-1"></i>
+                                            Under 2.5 </p>
                                     </div>
                                 </div>
                             </div>
-                           </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 bg-dark text-light shadow-sm hover-card">
+                                    <div class="pt-2 ps-3 d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-secondary rounded-pill">Serie A</span>
+                                        <small class="pe-3 text-muted">Tomorrow</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-around align-items-center mb-4">
+                                            <div class="text-center">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Juventus_FC_-_logo_black_%28Italy%2C_2020%29.svg"
+                                                    class="rounded-circle team-logo bg-light p-1" alt="Juventus">
+                                                <p class="mt-2 mb-0 fw-medium small">Juventus</p>
+                                            </div>
+                                            <div class="text-muted fw-bold small">VS</div>
+                                            <div class="text-center">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/640px-Logo_of_AC_Milan.svg.png"
+                                                    class="rounded-circle team-logo bg-light p-1" alt="AC Milan">
+                                                <p class="mt-2 mb-0 fw-medium small">AC Milan</p>
+                                            </div>
+                                        </div>
+                                        <span class="badge bg-primary mb-3 fw-normal">Over/Under Corners</span>
+                                        <div class="mb-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-1 small">
+                                                <span class="fw-medium">Confidence</span> <span>72%</span>
+                                            </div>
+                                            <div class="progress" style="height: 6px;" role="progressbar"
+                                                aria-label="Confidence 72%" aria-valuenow="72" aria-valuemin="0"
+                                                aria-valuemax="100">
+                                                <div class="progress-bar bg-success" style="width: 72%"></div>
+                                            </div>
+                                        </div>
+                                        <p class="fw-medium text-info mb-1"> <i class="bi bi-flag me-1"></i> Juventus
+                                            Over 2.5 </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 bg-dark text-light shadow-sm hover-card">
+                                    <div class="pt-2 ps-3 d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-info rounded-pill fw-normal">NBA</span> <small
+                                            class="pe-3 text-muted">2 hours ago</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-around align-items-center mb-4">
+                                            <div class="text-center">
+                                                <img src="https://a.espncdn.com/i/teamlogos/nba/500/min.png"
+                                                    class="rounded-circle team-logo bg-light p-1" alt="Timberwolves">
+                                                <p class="mt-2 mb-0 fw-medium small">Timberwolves</p>
+                                            </div>
+                                            <div class="text-muted fw-bold small">VS</div>
+                                            <div class="text-center">
+                                                <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/lal.png&h=200&w=200"
+                                                    class="rounded-circle team-logo bg-light p-1" alt="Lakers">
+                                                <p class="mt-2 mb-0 fw-medium small">Lakers</p>
+                                            </div>
+                                        </div>
+                                        <span class="badge bg-warning text-dark mb-3 fw-normal">Over/Under Points</span>
+                                        <div class="mb-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-1 small">
+                                                <span class="fw-medium">Confidence</span> <span>85%</span>
+                                            </div>
+                                            <div class="progress" style="height: 6px;" role="progressbar"
+                                                aria-label="Confidence 85%" aria-valuenow="85" aria-valuemin="0"
+                                                aria-valuemax="100">
+                                                <div class="progress-bar bg-success" style="width: 85%"></div>
+                                            </div>
+                                        </div>
+                                        <p class="fw-medium text-info mb-1"> <i class="bi bi-person-down me-1"></i>
+                                            Lebron James Under 24.5 pts </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="text-center mt-5">
-                            <button class="btn btn-outline-primary"><i class="bi bi-arrow-down-circle me-2"></i>Load More Predictions</button>
+                            <button class="btn btn-outline-primary">
+                                <i class="bi bi-arrow-down-circle me-2"></i>Load More Predictions
+                            </button>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="card shadow-sm mb-4 bg-dark text-light sticky-lg-top" style="top: 80px;">
                             <div class="card-body">
-                                <div class="d-flex align-items-center mb-4"><i class="bi bi-graph-up text-primary me-3 fs-4"></i><h3 class="h5 mb-0 text-light">Trending Insights</h3></div>
-                                <div class="insight-item"><h4 class="h6 mb-1 text-light">Lakers' home strength</h4><p class="text-muted small mb-1">Covered spread in 7 of last 8 home games.</p></div>
-                                <div class="insight-item"><h4 class="h6 mb-1 text-light">Barcelona's unbeaten run</h4><p class="text-muted small mb-1">Undefeated in last 10 LaLiga matches.</p></div>
-                                <div class="insight-item"><h4 class="h6 mb-1 text-light">Chivas clinch playoff spot</h4><p class="text-muted small mb-1">Secured Liguilla spot after strong finish.</p></div>
+                                <div class="d-flex align-items-center mb-4">
+                                    <i class="bi bi-graph-up text-primary me-3 fs-4"></i>
+                                    <h3 class="h5 mb-0 text-light">Trending Insights</h3>
+                                </div>
+                                <div class="insight-item">
+                                    <h4 class="h6 mb-1 text-light">Lakers' home strength</h4>
+                                    <p class="text-muted small mb-1">Covered spread in 7 of last 8 home games.</p>
+                                </div>
+                                <div class="insight-item">
+                                    <h4 class="h6 mb-1 text-light">Barcelona's unbeaten run</h4>
+                                    <p class="text-muted small mb-1">Undefeated in last 10 LaLiga matches.</p>
+                                </div>
+                                <div class="insight-item">
+                                    <h4 class="h6 mb-1 text-light">Chivas clinch playoff spot</h4>
+                                    <p class="text-muted small mb-1">Secured Liguilla spot after strong finish.</p>
+                                </div>
                             </div>
-                            <div class="card-footer bg-dark text-end border-top-0 pt-0"><a href="#" class="btn btn-link text-primary p-0 small">View All Insights <i class="bi bi-arrow-right-short"></i></a></div>
+                            <div class="card-footer bg-dark text-end border-top-0 pt-0">
+                                <a href="#" class="btn btn-link text-primary p-0 small">View All Insights <i
+                                        class="bi bi-arrow-right-short"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div> </div> </section>
+                </div>
+            </div>
+        </section>
     </main>
+
     <footer class="bg-dark py-4 border-top border-secondary">
         <div class="container">
             <div class="row align-items-center mb-3 gy-2">
-                <div class="col-md-6 text-center text-md-start"><span class="fw-bold text-light"><span class="text-primary">Stats</span>Predict</span></div>
+                <div class="col-md-6 text-center text-md-start">
+                    <span class="fw-bold text-light"><span class="text-primary">My</span>App</span>
+                </div>
                 <div class="col-md-6">
                     <nav class="nav justify-content-center justify-content-md-end">
                         <a class="nav-link text-muted small" href="#">About</a>
@@ -190,35 +305,79 @@
                 </div>
             </div>
             <hr class="border-secondary d-none d-md-block">
-            <p class="text-center text-muted small mb-0">&copy; 2025 StatsPredict. All rights reserved.</p>
+            <p class="text-center text-muted small mb-0">&copy; 2025 MyApp. All rights reserved.</p>
         </div>
     </footer>
+
     <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-light">
-                <div class="modal-header border-secondary"><h5 class="modal-title" id="userModalLabel"><i class="bi bi-pencil-square me-2"></i>Editar Perfil</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="userModalLabel"><i class="bi bi-pencil-square me-2"></i>Editar Perfil
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3"><label for="email" class="form-label">Email</label><input type="email" class="form-control form-control-dark" id="email" placeholder="usuario@ejemplo.com" required></div>
-                        <div class="mb-3"><label for="password" class="form-label">Nueva Contraseña (opcional)</label><input type="password" class="form-control form-control-dark" id="password" placeholder="Deja en blanco para no cambiar"></div>
-                        <div class="mb-3"><label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label><input type="password" class="form-control form-control-dark" id="confirmPassword" placeholder="Repite la nueva contraseña"></div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="usuario@ejemplo.com"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Nueva Contraseña (opcional)</label>
+                            <input type="password" class="form-control" id="password"
+                                placeholder="Deja en blanco para no cambiar">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="confirmPassword"
+                                placeholder="Repite la nueva contraseña">
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer border-secondary"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-2"></i>Guardar Cambios</button></div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-2"></i>Guardar
+                        Cambios</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-light">
-                <div class="modal-header border-danger border-2"><h5 class="modal-title text-danger" id="confirmDeleteModalLabel"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar Eliminación</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <div class="modal-body"><p>¿Estás seguro de que quieres eliminar tu cuenta permanentemente?</p><p class="text-danger fw-bold">¡Esta acción no se puede deshacer!</p></div>
-                <div class="modal-footer border-secondary"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-danger"><i class="bi bi-trash-fill me-2"></i>Sí, Eliminar Mi Cuenta</button></div>
+                <div class="modal-header border-danger border-2">
+                    <h5 class="modal-title text-danger" id="confirmDeleteModalLabel">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar Eliminación
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que quieres eliminar tu cuenta permanentemente?</p>
+                    <p class="text-danger fw-bold">¡Esta acción no se puede deshacer!</p>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill me-2"></i>Sí, Eliminar Mi
+                        Cuenta</button>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Inicializar tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+        // Opcional: Código adicional JS si lo necesitas
+    </script>
+</body>
+
 </html>
