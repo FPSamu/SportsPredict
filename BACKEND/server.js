@@ -37,12 +37,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', require('./routes/auth.routes'));
-// // Aquí es donde montaremos nuestras rutas principales más adelante
-// app.use('/api/auth', require('./routes/auth.routes'));
-// app.use('/api/matches', require('./routes/match.routes'));
-// app.use('/api/users', require('./routes/user.routes'));
-// // ... etc ...
-
+app.use('/api/matches', require('./routes/match.routes'));
+app.use('/api/users', require('./routes/user.routes'));
 
 // --- Configuración del Puerto y Arranque del Servidor ---
 
