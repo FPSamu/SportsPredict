@@ -37,14 +37,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', require('./routes/auth.routes'));
-// // Aquí es donde montaremos nuestras rutas principales más adelante
-// app.use('/api/auth', require('./routes/auth.routes'));
-// app.use('/api/matches', require('./routes/match.routes'));
-// app.use('/api/users', require('./routes/user.routes'));
-// // ... etc ...
-
-
-// --- Configuración del Puerto y Arranque del Servidor ---
+app.use('/api/matches', require('./routes/match.routes'));
 
 // Obtener el puerto desde las variables de entorno o usar 5000 por defecto
 const PORT = process.env.PORT || 5000;
