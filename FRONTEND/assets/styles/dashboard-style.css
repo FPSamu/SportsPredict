@@ -1,139 +1,250 @@
-/* --- dashboard-style.css --- */
-
-/* --- Estilos Base --- */
 body {
-    padding-top: 70px; /* Ajusta según la altura de tu navbar fijo */
+    padding-top: 70px;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #212529; /* bg-dark */
-    color: #dee2e6; /* text-light approx */
+    background-color: #212529;
+    color: #dee2e6;
 }
 
 main {
-     flex: 1; /* Empuja el footer hacia abajo */
+    flex: 1;
 }
 
 footer {
-    margin-top: auto; /* Asegura que el footer esté al final */
-    background-color: #212529; /* bg-dark */
-    padding-top: 1.5rem; /* py-4 approx */
-    padding-bottom: 1.5rem; /* py-4 approx */
-    border-top: 1px solid #495057; /* border-secondary approx */
+    margin-top: auto;
+    background-color: #212529;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-top: 1px solid #495057;
 }
- footer .nav-link {
-    padding: 0.5rem 0.5rem; /* Ajustar padding links footer */
-    color: #adb5bd !important; /* text-muted */
- }
-  footer .nav-link:hover {
-     color: #f8f9fa !important; /* text-light */
-  }
-
+footer .nav-link {
+    padding: 0.5rem 0.5rem;
+    color: #adb5bd !important;
+}
+footer .nav-link:hover {
+    color: #f8f9fa !important;
+}
 
 .navbar {
-     border-bottom: 1px solid #495057; /* border-secondary approx */
+    border-bottom: 1px solid #495057;
 }
- .navbar-brand .text-primary {
-     color: #0d6efd !important;
- }
- .nav-link.active {
-     font-weight: 500; /* fw-medium */
-     color: #0d6efd !important; /* text-primary */
- }
- .nav-link {
-     color: #dee2e6; /* text-light */
- }
- .nav-link:hover {
-     color: #f8f9fa; /* Más blanco al hacer hover */
- }
+.navbar-brand .text-primary {
+    color: #0d6efd !important;
+}
+.nav-link.active {
+    font-weight: 500;
+    color: #0d6efd !important;
+}
+.nav-link {
+    color: #dee2e6;
+}
+.nav-link:hover {
+    color: #f8f9fa;
+}
 
-/* Efecto hover general para tarjetas */
 .hover-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: .5rem; /* Borde redondeado */
+    border-radius: .5rem;
     border: 1px solid #495057;
 }
 
 .hover-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15) !important; /* Sombra azulada Bootstrap primary */
+    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15) !important;
 }
 
-/* Estilo para logo de equipo (genérico) */
 .team-logo {
     width: 40px;
     height: 40px;
     object-fit: contain;
-    background-color: #ffffff; /* Fondo blanco */
+    background-color: #ffffff;
     padding: 2px;
-    border-radius: 50%; /* Hacerlo circular */
+    border-radius: 50%;
 }
 
-
-/* Estilos para modales oscuros */
-.modal-content.bg-dark { border: 1px solid #495057; }
+.modal-content.bg-dark {
+    border: 1px solid #495057;
+}
 .modal-content.bg-dark .modal-header,
-.modal-content.bg-dark .modal-footer { border-color: #495057; }
-.modal-content.bg-dark .modal-header.border-danger { border-color: #dc3545 !important; }
-.modal-content.bg-dark .form-control { background-color: #495057; color: #fff; border-color: #6c757d; }
-.modal-content.bg-dark .form-control::placeholder { color: #adb5bd; }
-.modal-content.bg-dark .form-control:focus { background-color: #495057; color: #fff; border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
-.modal-content.bg-dark .btn-close-white { filter: invert(1) grayscale(100%) brightness(200%); }
+.modal-content.bg-dark .modal-footer {
+    border-color: #495057;
+}
+.modal-content.bg-dark .modal-header.border-danger {
+    border-color: #dc3545 !important;
+}
+.modal-content.bg-dark .form-control {
+    background-color: #495057;
+    color: #fff;
+    border-color: #6c757d;
+}
+.modal-content.bg-dark .form-control::placeholder {
+    color: #adb5bd;
+}
+.modal-content.bg-dark .form-control:focus {
+    background-color: #495057;
+    color: #fff;
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.modal-content.bg-dark .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
 
-/* Estilos para dropdown oscuro */
-.dropdown-menu { z-index: 1050; } /* z-index global para estar sobre otros elementos */
-.dropdown-menu.dropdown-menu-dark { background-color: #343a40; border-color: rgba(255, 255, 255, 0.15); }
-.dropdown-menu.dropdown-menu-dark .dropdown-item { color: #adb5bd; font-size: 0.9rem; }
+.dropdown-menu {
+    z-index: 1050;
+}
+.dropdown-menu.dropdown-menu-dark {
+    background-color: #343a40;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+.dropdown-menu.dropdown-menu-dark .dropdown-item {
+    color: #adb5bd;
+    font-size: 0.9rem;
+}
 .dropdown-menu.dropdown-menu-dark .dropdown-item:hover,
-.dropdown-menu.dropdown-menu-dark .dropdown-item:focus { color: #fff; background-color: rgba(255, 255, 255, 0.15); }
-.dropdown-menu.dropdown-menu-dark .dropdown-divider { border-color: rgba(255, 255, 255, 0.15); }
+.dropdown-menu.dropdown-menu-dark .dropdown-item:focus {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+.dropdown-menu.dropdown-menu-dark .dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.15);
+}
 
-/* Ocultar scrollbars */
-.overflow-auto::-webkit-scrollbar { display: none; }
-.overflow-auto { -ms-overflow-style: none; scrollbar-width: none; }
+.overflow-auto::-webkit-scrollbar {
+    display: none;
+}
+.overflow-auto {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 
-/* Ajustes adicionales */
-.progress-bar { transition: width 0.6s ease; }
-.text-muted { color: #adb5bd !important; } /* Asegurar color muted */
+.progress-bar {
+    transition: width 0.6s ease;
+}
+.text-muted {
+    color: #adb5bd !important;
+}
 
-/* --- Estilos Específicos Dashboard --- */
-.hero-section .lead { max-width: 600px; margin-left: auto; margin-right: auto; } /* Centrar y limitar ancho */
-.filter-buttons { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
-.insight-item { padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #495057; } /* Separador insights */
-.insight-item:last-child { border-bottom: none !important; padding-bottom: 0 !important; margin-bottom: 0 !important; }
-.card-footer .btn-link { text-decoration: none; } /* Quitar subrayado a links en footer de cards */
+.hero-section .lead {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.filter-buttons {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+.insight-item {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #495057;
+}
+.insight-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+.card-footer .btn-link {
+    text-decoration: none;
+}
 
-
-/* --- Estilos para la Búsqueda --- */
-.offcanvas-top { border-bottom: 1px solid #495057; }
-.form-control-dark { background-color: #495057; color: #fff; border-color: #6c757d; }
-.form-control-dark::placeholder { color: #adb5bd; }
-.form-control-dark:focus { background-color: #495057; color: #fff; border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
-.search-results-container { max-height: calc(80vh - 150px); overflow-y: auto; }
-.list-group-item-dark { background-color: transparent; border-bottom: 1px solid #495057 !important; color: #dee2e6; }
-.list-group-item-dark:last-child { border-bottom: none !important; }
+.offcanvas-top {
+    border-bottom: 1px solid #495057;
+}
+.form-control-dark {
+    background-color: #495057;
+    color: #fff;
+    border-color: #6c757d;
+}
+.form-control-dark::placeholder {
+    color: #adb5bd;
+}
+.form-control-dark:focus {
+    background-color: #495057;
+    color: #fff;
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.search-results-container {
+    max-height: calc(80vh - 150px);
+    overflow-y: auto;
+}
+.list-group-item-dark {
+    background-color: transparent;
+    border-bottom: 1px solid #495057 !important;
+    color: #dee2e6;
+}
+.list-group-item-dark:last-child {
+    border-bottom: none !important;
+}
 .list-group-item-dark.list-group-item-action:hover,
-.list-group-item-dark.list-group-item-action:focus { background-color: rgba(255, 255, 255, 0.05); color: #fff; }
-.team-name-result { font-weight: 500; }
-.favorite-btn { text-decoration: none; transition: transform 0.2s ease; }
-.favorite-btn:hover { transform: scale(1.2); }
-.favorite-btn i.bi-star { color: #ffc107; }
-.favorite-btn i.bi-star-fill { color: #ffc107; }
+.list-group-item-dark.list-group-item-action:focus {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+.team-name-result {
+    font-weight: 500;
+}
+.favorite-btn {
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+.favorite-btn:hover {
+    transform: scale(1.2);
+}
+.favorite-btn i.bi-star {
+    color: #ffc107;
+}
+.favorite-btn i.bi-star-fill {
+    color: #ffc107;
+}
 
-
-/* --- Estilos Responsivos Específicos para Dashboard --- */
 @media (max-width: 575.98px) {
-    .display-4 { font-size: 2.5rem; }
-    .lead { font-size: 1rem; margin-bottom: 1.5rem !important; }
-    .h3 { font-size: 1.5rem; }
-    .filter-buttons .btn { padding: 0.25rem 0.75rem; font-size: 0.8rem; }
-    .filter-buttons .btn i { font-size: 0.8em; }
-    .card .card-body .small, .card .card-body .fw-medium.small { font-size: 0.8rem; }
-    .card .card-body .fw-medium.text-info { font-size: 0.85rem; word-break: break-word; }
-    .card .badge { font-size: 0.7rem; padding: 0.25em 0.5em; }
-    .card .team-logo { width: 30px; height: 30px; }
-    .insight-item .h6 { font-size: 0.9rem; }
-    .insight-item .small { font-size: 0.8rem; }
-    .hero-buttons.flex-column { gap: 0.5rem !important; }
-     .sticky-lg-top { position: static !important; } /* Desactivar sticky en móvil */
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    .lead {
+        font-size: 1rem;
+        margin-bottom: 1.5rem !important;
+    }
+    .h3 {
+        font-size: 1.5rem;
+    }
+    .filter-buttons .btn {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    .filter-buttons .btn i {
+        font-size: 0.8em;
+    }
+    .card .card-body .small,
+    .card .card-body .fw-medium.small {
+        font-size: 0.8rem;
+    }
+    .card .card-body .fw-medium.text-info {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+    .card .badge {
+        font-size: 0.7rem;
+        padding: 0.25em 0.5em;
+    }
+    .card .team-logo {
+        width: 30px;
+        height: 30px;
+    }
+    .insight-item .h6 {
+        font-size: 0.9rem;
+    }
+    .insight-item .small {
+        font-size: 0.8rem;
+    }
+    .hero-buttons.flex-column {
+        gap: 0.5rem !important;
+    }
+    .sticky-lg-top {
+        position: static !important;
+    }
 }
