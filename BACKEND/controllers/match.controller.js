@@ -1,18 +1,16 @@
 const Match = require('../models/Match.model');
 const mongoose = require('mongoose');
 
-// --- Controlador para Obtener Próximos Partidos ---
 exports.getUpcomingMatches = async (req, res) => {
   try {
-    const { sport, leagueId, days = 7, page = 1, limit = 20 } = req.query; // Obtener query params
+    const { sport, leagueId, days = 7, page = 1, limit = 20 } = req.query;
 
     const queryFilter = {
-      status: { $in: ['scheduled', 'timed'] }, // Estados para partidos futuros
-      matchDate: { $gte: new Date() } // Fecha mayor o igual a ahora
+      status: { $in: ['scheduled', 'timed'] },
+      matchDate: { $gte: new Date() }
     };
 
     if (sport) {
-      // Filtrar por deporte (asegurarse de que coincida con 'Football' o 'Basketball')
       if (['Football', 'Basketball'].includes(sport)) {
         queryFilter.sport = sport;
       } else {
@@ -20,8 +18,6 @@ exports.getUpcomingMatches = async (req, res) => {
       }
     }
     if (leagueId) {
-        // Filtrar por ID de liga (de la API correspondiente)
-        // Asegurarse que leagueId sea un número
         const leagueIdNum = parseInt(leagueId);
         if (!isNaN(leagueIdNum)) {
              queryFilter['league.apiLeagueId'] = leagueIdNum;
@@ -30,21 +26,18 @@ exports.getUpcomingMatches = async (req, res) => {
         }
     }
 
-    // Calcular fecha límite si se especifica 'days'
     if (days) {
         const limitDate = new Date();
         limitDate.setDate(limitDate.getDate() + parseInt(days));
-        queryFilter.matchDate.$lte = limitDate; // Menor o igual a la fecha límite
+        queryFilter.matchDate.$lte = limitDate;
     }
 
-    // Calcular paginación
     const limitNum = parseInt(limit);
     const pageNum = parseInt(page);
     const skip = (pageNum - 1) * limitNum;
 
-    // Ejecutar consulta y contar total
     const matches = await Match.find(queryFilter)
-      .sort({ matchDate: 1 }) // Ordenar por fecha ascendente
+      .sort({ matchDate: 1 })
       .skip(skip)
       .limit(limitNum);
 
@@ -67,14 +60,13 @@ exports.getUpcomingMatches = async (req, res) => {
   }
 };
 
-// --- Controlador para Obtener Partidos Recientes ---
 exports.getRecentMatches = async (req, res) => {
   try {
     const { sport, leagueId, days = 7, page = 1, limit = 20 } = req.query;
 
     const queryFilter = {
-      status: 'finished', // Solo partidos finalizados
-      matchDate: { $lte: new Date() } // Fecha menor o igual a ahora
+      status: 'finished',
+      matchDate: { $lte: new Date() }
     };
 
     if (sport) {
@@ -93,21 +85,18 @@ exports.getRecentMatches = async (req, res) => {
         }
     }
 
-    // Calcular fecha de inicio si se especifica 'days'
     if (days) {
         const startDate = new Date();
         startDate.setDate(startDate.getDate() - parseInt(days));
-        queryFilter.matchDate.$gte = startDate; // Mayor o igual a la fecha de inicio
+        queryFilter.matchDate.$gte = startDate;
     }
 
-    // Calcular paginación
     const limitNum = parseInt(limit);
     const pageNum = parseInt(page);
     const skip = (pageNum - 1) * limitNum;
 
-    // Ejecutar consulta y contar total
     const matches = await Match.find(queryFilter)
-      .sort({ matchDate: -1 }) // Ordenar por fecha descendente (más recientes primero)
+      .sort({ matchDate: -1 })
       .skip(skip)
       .limit(limitNum);
 
@@ -130,12 +119,10 @@ exports.getRecentMatches = async (req, res) => {
   }
 };
 
-// --- Controlador para Obtener un Partido por ID ---
 exports.getMatchById = async (req, res) => {
   try {
     const matchId = req.params.id;
 
-    // Validar si es un ObjectId válido de MongoDB
     if (!mongoose.Types.ObjectId.isValid(matchId)) {
         return res.status(400).json({ message: 'ID de partido inválido.' });
     }
@@ -145,11 +132,6 @@ exports.getMatchById = async (req, res) => {
     if (!match) {
       return res.status(404).json({ message: 'Partido no encontrado.' });
     }
-
-    // Opcional (V2?): Aquí podríamos buscar el logo en 'team_details' si fuera necesario
-    // const homeTeamDetails = await TeamDetail.findOne({ apiTeamId: match.teams.home.apiTeamId, sport: match.sport });
-    // const awayTeamDetails = await TeamDetail.findOne({ apiTeamId: match.teams.away.apiTeamId, sport: match.sport });
-    // match.teams.home.logo = homeTeamDetails?.logoUrl; // Añadir logo si se encuentra
 
     res.status(200).json({
       message: "Detalles del partido obtenidos.",
