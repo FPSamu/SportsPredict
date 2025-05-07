@@ -1,5 +1,7 @@
+// BACKEND/models/Match.model.js
 const mongoose = require('mongoose');
 
+// ... (teamSchema, leagueSchema, scoreSchema se mantienen igual que antes) ...
 const teamSchema = new mongoose.Schema({
     apiTeamId: { type: Number, required: true },
     name: { type: String, required: true, trim: true },
@@ -9,7 +11,8 @@ const teamSchema = new mongoose.Schema({
 const leagueSchema = new mongoose.Schema({
     apiLeagueId: { type: Number, required: true },
     name: { type: String, required: true, trim: true },
-    season: { type: String, required: true }
+    season: { type: String, required: true },
+    logo: { type: String }
 }, { _id: false });
 
 const scoreSchema = new mongoose.Schema({
@@ -17,32 +20,35 @@ const scoreSchema = new mongoose.Schema({
     away: { type: Number }
 }, { _id: false });
 
-const predictionSchema = new mongoose.Schema({
-    generatedAt: { type: Date },
-    ft_winner_prob: { home: Number, draw: Number, away: Number },
-    ft_ou_goals_prob: { line: Number, over: Number, under: Number },
-    ft_btts_prob: { yes: Number, no: Number },
-    bk_winner_prob: { home: Number, away: Number },
-    bk_total_pts_prob: { line: Number, over: Number, under: Number },
+
+// --- NUEVO: Sub-esquema para cada línea de Over/Under ---
+const overUnderLineSchema = new mongoose.Schema({
+    line: { type: Number, required: true },
+    over: { type: Number, required: true },
+    under: { type: Number, required: true },
+    source: { type: String } // Opcional: 'historical_frequency', 'default_no_data', etc.
 }, { _id: false });
 
+// --- Esquema de Predicciones MODIFICADO ---
+const predictionSchema = new mongoose.Schema({
+    generatedAt: { type: Date },
+    // Fútbol
+    ft_winner_prob: { home: Number, draw: Number, away: Number },
+    // <<< CAMBIO: Ahora es un array que usa overUnderLineSchema >>>
+    ft_ou_goals_prob: [overUnderLineSchema],
+    ft_btts_prob: { yes: Number, no: Number },
+    // Básquetbol
+    bk_winner_prob: { home: Number, away: Number },
+    // <<< CAMBIO: Ahora es un array que usa overUnderLineSchema >>>
+    bk_total_pts_prob: [overUnderLineSchema],
+}, { _id: false });
+
+
+// --- Esquema Principal del Partido/Juego (el resto sigue igual) ---
 const matchSchema = new mongoose.Schema({
-    sport: {
-        type: String,
-        required: true,
-        enum: ['Football', 'Basketball'],
-        index: true
-    },
-    matchDate: {
-        type: Date,
-        required: true,
-        index: true
-    },
-    status: {
-        type: String,
-        required: true,
-        index: true
-    },
+    sport: { /* ... */ },
+    matchDate: { /* ... */ },
+    status: { /* ... */ },
     apiFootballDataOrgMatchId: { type: Number, sparse: true, unique: true, required: false },
     apiBasketballGameId: { type: Number, sparse: true, unique: true, required: false },
     league: leagueSchema,
@@ -51,12 +57,13 @@ const matchSchema = new mongoose.Schema({
         away: teamSchema
     },
     scores: scoreSchema,
-    predictions: predictionSchema,
+    predictions: predictionSchema, // Ahora usa el predictionSchema modificado
     isTrending: { type: Boolean, default: false, index: true }
 }, {
     timestamps: true
 });
 
+// Índices (sin cambios)
 matchSchema.index({ sport: 1, matchDate: -1 });
 matchSchema.index({ status: 1, matchDate: 1 });
 matchSchema.index({ "teams.home.apiTeamId": 1, matchDate: -1 });

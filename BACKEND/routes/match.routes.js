@@ -9,4 +9,6 @@ router.get('/recent', protect, matchController.getRecentMatches);
 
 router.get('/:id', protect, matchController.getMatchById);
 
+router.get('/:matchId/predictions', protect, matchController.getMatchPredictions); // <<< NUEVA RUTA
+
 module.exports = router;
