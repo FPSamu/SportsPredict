@@ -37,7 +37,7 @@ TARGET_COMPETITIONS = [
 
 MAX_DAYS_RANGE = 9
 try:
-    overall_start_date = datetime.now() - timedelta(days=90)
+    overall_start_date = datetime.now() - timedelta(days=5)
     overall_end_date = datetime.now() + timedelta(days=14)
     logging.info(f"Rango total a cubrir: {overall_start_date.strftime('%Y-%m-%d')} hasta {overall_end_date.strftime('%Y-%m-%d')}")
 except Exception as e:
@@ -190,7 +190,7 @@ def process_and_save_fdo_matches(matches_data):
     else:
         logging.info("No hay operaciones FDO válidas para realizar en la BD.")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     logging.info(f"--- Iniciando Fetch de Partidos de Fútbol (Football-Data.org) ({datetime.now()}) ---")
     start_time = time.time()
     all_matches_data = []
