@@ -63,7 +63,7 @@ const populateLogos = async (matches) => {
 
 exports.getUpcomingMatches = async (req, res) => {
   try {
-    const { sport, leagueId, days = 7, page = 1, limit = 20 } = req.query;
+    const { sport, leagueId, days = 7, page = 1, limit = 200 } = req.query;
 
     const queryFilter = {
       status: { $in: ['scheduled', 'timed'] },
@@ -124,15 +124,28 @@ exports.getUpcomingMatches = async (req, res) => {
 
 exports.getRecentMatches = async (req, res) => {
   try {
-    const { sport, leagueId, days = 7, page = 1, limit = 20 } = req.query;
+    const { sport, leagueId, days = 7, page = 1, limit = 200 } = req.query;
 
     const queryFilter = {
       status: 'finished',
       matchDate: { $lte: new Date() }
     };
 
-    if (sport) { }
-    if (leagueId) { }
+    if (sport) {
+      if (['Football', 'Basketball'].includes(sport)) {
+        queryFilter.sport = sport;
+      } else {
+        return res.status(400).json({ message: 'Valor de sport inválido. Usar Football o Basketball.' });
+      }
+    }
+    if (leagueId) {
+      const leagueIdNum = parseInt(leagueId);
+      if (!isNaN(leagueIdNum)) {
+        queryFilter['league.apiLeagueId'] = leagueIdNum;
+      } else {
+        return res.status(400).json({ message: 'leagueId debe ser un número.' });
+      }
+    }
     if (days && !isNaN(parseInt(days))) {
       const startDate = new Date();
       startDate.setDate(startDate.getDate() - parseInt(days));
