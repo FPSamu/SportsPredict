@@ -1,1 +1,3 @@
-GET https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=Houston%20Rockets
+GET http://localhost:5000/api/matches/recent?sport=Football&limit=2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MTdmOTVhOTY4MGRiODkyNjNjNzAxMCIsImlhdCI6MTc0NjQwNjUyMCwiZXhwIjoxNzQ3MDExMzIwfQ.fZQG0zcwGnTPZWZl5KkzfuK_Z1EBgYWLH8Zt4RR7MEs
