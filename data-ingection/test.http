@@ -1,3 +1,3 @@
-GET http://localhost:5000/api/matches/681448cf684705c061b7032c/predictions
+GET http://localhost:5000/api/teams/search?name=xxxxyyyy
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MTdmOTVhOTY4MGRiODkyNjNjNzAxMCIsImlhdCI6MTc0NjQwNjUyMCwiZXhwIjoxNzQ3MDExMzIwfQ.fZQG0zcwGnTPZWZl5KkzfuK_Z1EBgYWLH8Zt4RR7MEs

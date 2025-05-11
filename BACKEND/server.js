@@ -1,5 +1,3 @@
-// BACKEND/server.js
-
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -39,10 +37,8 @@ app.get('/', (req, res) => {
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/matches', require('./routes/match.routes'));
 app.use('/api/users', require('./routes/user.routes'));
+app.use('/api/teams', require('./routes/team.routes'));
 
-// --- Configuración del Puerto y Arranque del Servidor ---
-
-// Obtener el puerto desde las variables de entorno o usar 5000 por defecto
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, () => {
@@ -57,6 +53,4 @@ server.on('error', (error) => {
 
 process.on('unhandledRejection', (err, promise) => {
   console.error(`Error de Promesa no Manejada: ${err.message}`);
-  // Considera cerrar el servidor de forma controlada en errores graves
-  // server.close(() => process.exit(1));
 });
