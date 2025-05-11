@@ -65,7 +65,7 @@ const populateLogos = async (matches) => {
 
 exports.getUpcomingMatches = async (req, res) => {
   try {
-    const { sport, leagueId, days = 7, page = 1, limit = 20 } = req.query;
+    const { sport, leagueId, days = 7, page = 1, limit = 200 } = req.query;
 
     const queryFilter = {
       status: { $in: ['scheduled', 'timed'] },
@@ -126,7 +126,7 @@ exports.getUpcomingMatches = async (req, res) => {
 
 exports.getRecentMatches = async (req, res) => {
   try {
-    const { sport, leagueId, days = 7, page = 1, limit = 20 } = req.query;
+    const { sport, leagueId, days = 7, page = 1, limit = 200 } = req.query;
 
     const queryFilter = {
       status: 'finished',
