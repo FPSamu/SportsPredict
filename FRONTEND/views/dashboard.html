@@ -117,9 +117,9 @@
                                     class="bi bi-funnel me-1"></i>Filters
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="#">Today's Games</a></li>
-                                <li><a class="dropdown-item" href="#">High Confidence</a></li>
-                                <li><a class="dropdown-item" href="#">Popular</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="all">All</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="today">Today's Games</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="highConfidence">High Confidence</a></li>
                             </ul>
                         </div>
                     </div>
@@ -282,39 +282,9 @@
                             </div>
                         </div>
 
-                        <div class="text-center mt-5">
-                            <button class="btn btn-outline-primary">
-                                <i class="bi bi-arrow-down-circle me-2"></i>Load More Predictions
-                            </button>
-                        </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="card shadow-sm mb-4 bg-dark text-light sticky-lg-top" style="top: 80px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <i class="bi bi-graph-up text-primary me-3 fs-4"></i>
-                                    <h3 class="h5 mb-0 text-light">Trending Insights</h3>
-                                </div>
-                                <div class="insight-item">
-                                    <h4 class="h6 mb-1 text-light">Lakers' home strength</h4>
-                                    <p class="text-muted small mb-1">Covered spread in 7 of last 8 home games.</p>
-                                </div>
-                                <div class="insight-item">
-                                    <h4 class="h6 mb-1 text-light">Barcelona's unbeaten run</h4>
-                                    <p class="text-muted small mb-1">Undefeated in last 10 LaLiga matches.</p>
-                                </div>
-                                <div class="insight-item">
-                                    <h4 class="h6 mb-1 text-light">Chivas clinch playoff spot</h4>
-                                    <p class="text-muted small mb-1">Secured Liguilla spot after strong finish.</p>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-dark text-end border-top-0 pt-0">
-                                <a href="#" class="btn btn-link text-primary p-0 small">View All Insights <i
-                                        class="bi bi-arrow-right-short"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -339,43 +309,6 @@
             <p class="text-center text-muted small mb-0">&copy; 2025 StatsPredict. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-light">
-                <div class="modal-header border-secondary">
-                    <h5 class="modal-title" id="userModalLabel"><i class="bi bi-pencil-square me-2"></i>Editar Perfil
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="usuario@ejemplo.com"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Nueva Contraseña (opcional)</label>
-                            <input type="password" class="form-control" id="password"
-                                placeholder="Deja en blanco para no cambiar">
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
-                            <input type="password" class="form-control" id="confirmPassword"
-                                placeholder="Repite la nueva contraseña">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer border-secondary">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-2"></i>Guardar
-                        Cambios</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
         aria-hidden="true">
