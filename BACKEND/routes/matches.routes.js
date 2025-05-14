@@ -5,6 +5,7 @@ const { protect } = require('../middleware/auth.middleware');
 
 router.get('/upcoming', protect, matchController.getUpcomingMatches); // Protegida
 router.get('/recent', protect, matchController.getRecentMatches); // Protegida
+router.get('/trending', protect, matchController.getTrendingMatches);
 router.get('/:id', protect, matchController.getMatchById); // Protegida
 
 module.exports = router;

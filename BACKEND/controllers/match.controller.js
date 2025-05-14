@@ -62,6 +62,55 @@ const populateLogos = async (matches) => {
     return matches;
   }
 };
+// En backend/controllers/match.controller.js
+
+// ... (tus otros requires como Match, TeamDetails, etc.)
+
+exports.getTrendingMatches = async (req, res) => {
+  try {
+      const { sport } = req.query; // El frontend podría enviar un filtro de deporte
+
+      const now = new Date();
+      const tomorrow = new Date(now);
+      tomorrow.setDate(now.getDate() + 1);
+      tomorrow.setHours(23, 59, 59, 999); // Fin del día de mañana
+
+      const queryFilter = {
+          $or: [
+              { status: { $in: ['LIVE', 'IN_PLAY', '1H', 'HT', '2H', 'ET', 'PEN_LIVE'] } }, // Partidos en vivo
+              { matchDate: { $gte: now, $lte: tomorrow } } // O partidos programados para hoy y mañana
+          ],
+          // Podrías añadir más lógica aquí para "equipos top" si tienes sus IDs en el backend
+      };
+
+      if (sport) {
+          if (['Football', 'Basketball'].includes(sport)) {
+              queryFilter.sport = sport;
+          } else {
+              // Considera no devolver error y simplemente no filtrar por deporte si es inválido
+          }
+      }
+
+      console.log("getTrendingMatches - queryFilter:", JSON.stringify(queryFilter));
+
+      let matches = await Match.find(queryFilter)
+          .sort({ matchDate: 1 }) // En vivo primero (si el status los pone antes), luego por fecha
+          .limit(30) // Limitar resultados para no sobrecargar
+          .lean();
+
+      matches = await populateLogos(matches); // Reutiliza tu función para añadir logos
+
+      res.status(200).json({
+          message: "Partidos trending obtenidos.",
+          data: matches,
+          // Podrías añadir paginación si esperas muchos resultados
+      });
+
+  } catch (error) {
+      console.error("Error en getTrendingMatches:", error);
+      res.status(500).json({ message: "Error del servidor al obtener partidos trending." });
+  }
+};
 
 exports.getUpcomingMatches = async (req, res) => {
   try {

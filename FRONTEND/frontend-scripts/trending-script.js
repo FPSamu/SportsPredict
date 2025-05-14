@@ -40,7 +40,8 @@ const leagueMappingsTrending = {
 let activeTrendingFilters = {
     sport: null,
     leagueId: null,
-    favoritesOnly: false
+    favoritesOnly: false,
+    searchedTeam: null
 };
 let userFavoritesTrending = [];
 
@@ -129,6 +130,160 @@ function createTrendingMatchCardHTML(match) {
             </div>
         </div>`;
 }
+// ... (después de createTrendingMatchCardHTML) ...
+
+function isTeamFavoriteTrending(apiTeamId, sport) {
+    if (!userFavoritesTrending || userFavoritesTrending.length === 0) return false;
+    return userFavoritesTrending.some(fav => 
+        fav.apiTeamId?.toString() === apiTeamId?.toString() && 
+        fav.sport?.toLowerCase() === sport?.toLowerCase()
+    );
+}
+
+async function toggleFavoriteTeamTrending(team, starIcon) {
+    if (!team || !team.apiTeamId || !team.sport) {
+        console.error("Trending: Datos incompletos del equipo para favorito:", team);
+        return;
+    }
+    const currentlyFavorite = isTeamFavoriteTrending(team.apiTeamId, team.sport);
+    const method = currentlyFavorite ? 'DELETE' : 'POST';
+    const endpoint = '/users/me/favorites'; // Endpoint global de favoritos
+    const body = { apiTeamId: team.apiTeamId, sport: team.sport };
+    const response = await fetchDataTrending(endpoint, method, body);
+
+    if (response && response.favorites) {
+        userFavoritesTrending = response.favorites;
+        console.log('Trending: Favoritos actualizados:', userFavoritesTrending);
+        if (isTeamFavoriteTrending(team.apiTeamId, team.sport)) {
+            starIcon.classList.remove('bi-star');
+            starIcon.classList.add('bi-star-fill', 'text-warning');
+            starIcon.setAttribute('title', 'Quitar de favoritos');
+        } else {
+            starIcon.classList.remove('bi-star-fill', 'text-warning');
+            starIcon.classList.add('bi-star');
+            starIcon.setAttribute('title', 'Añadir a favoritos');
+        }
+        // Si el filtro "Favorites" está activo, recargar
+        if (activeTrendingFilters.favoritesOnly) {
+            loadTrendingMatches();
+        }
+    } else {
+        alert(`Hubo un error al actualizar tus favoritos.`);
+    }
+}
+
+// ... (después de toggleFavoriteTeamTrending) ...
+
+/**
+ * Actualiza el texto del botón del dropdown de filtros de liga.
+ * @param {string} [text=null] - El texto a mostrar. Si es null, usa el texto por defecto.
+ */
+function updateLeagueDropdownButtonTextTrending(text = null) {
+    const leagueFilterSection = document.querySelector('h2.text-light + .dropdown'); // Selector para trending.html
+    const leagueDropdownButton = leagueFilterSection ? leagueFilterSection.querySelector('.dropdown-toggle.btn-sm') : null;
+    if (leagueDropdownButton) {
+        if (text) {
+            leagueDropdownButton.textContent = text;
+        } else {
+            leagueDropdownButton.innerHTML = '<i class="bi bi-filter me-1"></i>Filter';
+        }
+    }
+}
+
+
+function setupTeamSearchTrending() {
+    console.log("DEBUG: setupTeamSearchTrending() se está ejecutando.");
+    const searchInput = document.getElementById('teamSearchInput'); // Asume el mismo ID que en matches.html
+    const searchResultsContainer = document.getElementById('searchResults');
+    const offcanvasElement = document.getElementById('offcanvasSearch');
+    const offcanvasSearchInstance = offcanvasElement ? (bootstrap.Offcanvas.getInstance(offcanvasElement) || new bootstrap.Offcanvas(offcanvasElement)) : null;
+
+    if (!searchInput || !searchResultsContainer) { console.warn('Trending Search: Elementos UI no encontrados.'); return; }
+    console.log("DEBUG: Trending Search: Elementos (input y results container) encontrados.");
+
+    let searchTimeout;
+    searchInput.addEventListener('input', (event) => {
+        clearTimeout(searchTimeout);
+        const query = event.target.value.trim();
+        if (query.length < 3) { searchResultsContainer.innerHTML = '<p class="text-muted p-3 small">Escribe al menos 3 caracteres.</p>'; return; }
+        searchResultsContainer.innerHTML = '<div class="p-3 text-center"><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Buscando...</span></div></div>';
+
+        searchTimeout = setTimeout(async () => {
+            let searchApiEndpoint = `/teams/search?name=${encodeURIComponent(query)}`;
+            // Opcional: Añadir filtro de deporte si está activo en los pills
+            if (activeTrendingFilters.sport) {
+                searchApiEndpoint += `&sport=${encodeURIComponent(activeTrendingFilters.sport)}`;
+            }
+            console.log("Trending Search: Buscando equipos con endpoint:", API_BASE_URL_TRENDING + searchApiEndpoint);
+            const response = await fetchDataTrending(searchApiEndpoint); 
+            searchResultsContainer.innerHTML = ''; 
+            if (response && response.data && response.data.length > 0) {
+                response.data.forEach(team => { // team debe tener {apiTeamId, name, sport, logoUrl}
+                    const isFav = isTeamFavoriteTrending(team.apiTeamId, team.sport);
+                    const starClass = isFav ? 'bi-star-fill text-warning' : 'bi-star';
+
+                    const teamElementWrapper = document.createElement('div');
+                    teamElementWrapper.className = 'list-group-item list-group-item-action bg-dark text-light d-flex align-items-center justify-content-between py-2 search-result-item';
+                    
+                    const teamInfoContainer = document.createElement('div');
+                    teamInfoContainer.className = 'd-flex align-items-center flex-grow-1';
+                    teamInfoContainer.style.cursor = 'pointer';
+                    teamInfoContainer.innerHTML = `
+                        <img src="${team.logoUrl || 'https://via.placeholder.com/30?text=L'}" alt="${team.name}" class="rounded-circle me-3" style="width: 30px; height: 30px; object-fit: contain;">
+                        <span class="flex-grow-1">${team.name} <small class="text-muted">(${team.sport || 'N/A'})</small></span>
+                    `;
+
+                    const starIcon = document.createElement('i');
+                    starIcon.className = `bi ${starClass} favorite-star-search ms-auto p-2`;
+                    starIcon.style.cursor = 'pointer';
+                    starIcon.setAttribute('role', 'button');
+                    starIcon.setAttribute('title', isFav ? 'Quitar de favoritos' : 'Añadir a favoritos');
+
+                    teamInfoContainer.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log('Trending Search: Equipo seleccionado:', team);
+                        activeTrendingFilters.searchedTeam = { apiTeamId: team.apiTeamId, name: team.name, sport: team.sport };
+                        activeTrendingFilters.sport = team.sport; // Forzar el filtro de deporte al del equipo buscado
+                        activeTrendingFilters.leagueId = null;      
+                        activeTrendingFilters.favoritesOnly = false; 
+                        
+                        updateLeagueDropdownButtonTextTrending(`${team.name}`); // Mostrar nombre del equipo en el botón de filtro
+                        // Actualizar UI de botones pill de deporte
+                        const sportButtonsContainer = document.querySelector('div.filter-container');
+                        if(sportButtonsContainer){
+                            const sportButtons = sportButtonsContainer.querySelectorAll('button');
+                            sportButtons.forEach(btn => {
+                                btn.classList.remove('btn-primary', 'text-white'); btn.classList.add('btn-outline-light');
+                                const btnTextLower = btn.textContent.trim().toLowerCase();
+                                if (team.sport === 'Football' && btnTextLower.includes('futbol')) { btn.classList.add('btn-primary', 'text-white'); btn.classList.remove('btn-outline-light');} 
+                                else if (team.sport === 'Basketball' && btnTextLower.includes('basketball')) { btn.classList.add('btn-primary', 'text-white'); btn.classList.remove('btn-outline-light');}
+                            });
+                        }
+                        
+                        loadTrendingMatches(); // Recargar la vista de trending
+
+                        if(offcanvasSearchInstance) offcanvasSearchInstance.hide();
+                        searchInput.value = ''; 
+                        searchResultsContainer.innerHTML = '';
+                    });
+
+                    starIcon.addEventListener('click', (e) => {
+                        e.stopPropagation(); 
+                        toggleFavoriteTeamTrending(team, starIcon);
+                    });
+
+                    teamElementWrapper.appendChild(teamInfoContainer);
+                    teamElementWrapper.appendChild(starIcon);
+                    searchResultsContainer.appendChild(teamElementWrapper);
+                });
+            } else if (response && response.data && response.data.length === 0) {
+                searchResultsContainer.innerHTML = '<p class="text-muted p-3">No se encontraron equipos.</p>';
+            } else {
+                 searchResultsContainer.innerHTML = '<p class="text-danger p-3">Error al buscar equipos.</p>';
+            }
+        }, 500);
+    });
+}
 
 async function getNClosestUpcomingTopMatchesForSport(specificSportTopTeams, sportName, count, excludeMatchIdsSet, activeLeagueId, daysToFetch = 14) {
     if (!specificSportTopTeams || specificSportTopTeams.length === 0) return [];
@@ -155,74 +310,117 @@ async function getNClosestUpcomingTopMatchesForSport(specificSportTopTeams, spor
     return topTeamMatches.slice(0, count);
 }
 
+// En trending-script.js
+
 async function loadTrendingMatches() {
-    console.log("DEBUG: loadTrendingMatches() llamada con filtros:", JSON.parse(JSON.stringify(activeTrendingFilters))); // Log de filtros activos
+    console.log("DEBUG: loadTrendingMatches() llamada con filtros:", JSON.parse(JSON.stringify(activeTrendingFilters)));
     const trendingMatchesContainer = document.getElementById('trending-matches');
     if (!trendingMatchesContainer) { console.error("Trending: Contenedor 'trending-matches' no encontrado."); return; }
     trendingMatchesContainer.innerHTML = `<div class="col-12 text-center p-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div><p class="mt-2">Cargando partidos trending...</p></div>`;
 
-    let allTrendingMatches = [];
-    let fetchedMatchIds = new Set();
+    let finalMatchesToShow = [];
+    let fetchedMatchIds = new Set(); // Para evitar duplicados
 
+    // --- 1. Obtener Partidos "En Vivo" ---
     let liveParams = new URLSearchParams();
-    if (activeTrendingFilters.sport) { liveParams.append('sport', activeTrendingFilters.sport); }
-    // Nota: El PDF no especifica que /trending acepte leagueId. Si tu backend SÍ lo hace, puedes añadirlo aquí:
+    if (activeTrendingFilters.sport) { // Si hay filtro de deporte, pasarlo a /trending
+        liveParams.append('sport', activeTrendingFilters.sport);
+    }
+    // Si el backend /trending soporta leagueId y un filtro de liga está activo, se puede pasar.
     // if (activeTrendingFilters.leagueId) { liveParams.append('leagueId', activeTrendingFilters.leagueId); }
+
     const liveEndpoint = '/matches/trending' + (liveParams.toString() ? `?${liveParams.toString()}` : '');
-    console.log("Trending: Fetching live/trending from", liveEndpoint);
+    console.log("Trending: Fetching live/trending matches from", liveEndpoint);
     const trendingResponse = await fetchDataTrending(liveEndpoint); 
     
     if (trendingResponse && trendingResponse.data) {
         let potentialLiveMatches = trendingResponse.data;
-        // Filtro de liga en cliente para /trending si no se envió a API y hay filtro de liga activo
-        if (activeTrendingFilters.leagueId && !liveParams.has('leagueId')) {
+        // Aplicar filtro de liga en cliente si no se envió a la API y está activo
+        if (activeTrendingFilters.leagueId && !liveParams.has('leagueId')) { 
             potentialLiveMatches = potentialLiveMatches.filter(match => match.league?.apiLeagueId === activeTrendingFilters.leagueId);
         }
+
         potentialLiveMatches.forEach(match => {
             const status = match.status ? match.status.toUpperCase() : '';
             if (['LIVE', 'IN_PLAY', '1H', 'HT', '2H', 'ET', 'PEN_LIVE'].includes(status)) {
                 if (!fetchedMatchIds.has(match._id || match.id)) {
-                    allTrendingMatches.push(match);
+                    finalMatchesToShow.push(match);
                     fetchedMatchIds.add(match._id || match.id);
                 }
             }
         });
     }
-    console.log("Trending: Partidos 'en vivo' (o de /trending) encontrados:", allTrendingMatches.filter(m => ['LIVE', 'IN_PLAY', '1H', 'HT', '2H', 'ET', 'PEN_LIVE'].includes(m.status?.toUpperCase())).length);
+    console.log("Trending: Partidos 'en vivo' (o de /trending filtrados como en vivo) encontrados:", finalMatchesToShow.length);
 
-    const footballTopTeamsFromConfig = topTeamConfigs.filter(t => t.sport === 'Football');
-    if (footballTopTeamsFromConfig.length > 0 && (!activeTrendingFilters.sport || activeTrendingFilters.sport === 'Football')) {
-        const topFootballUpcoming = await getNClosestUpcomingTopMatchesForSport(footballTopTeamsFromConfig, 'Football', 2, fetchedMatchIds, activeTrendingFilters.leagueId);
-        topFootballUpcoming.forEach(match => { if (!fetchedMatchIds.has(match._id || match.id)) { allTrendingMatches.push(match); fetchedMatchIds.add(match._id || match.id); } });
-        console.log("Trending: Top Próximos Fútbol añadidos:", topFootballUpcoming.length);
-    }
+    // --- 2. Obtener Próximos Partidos (Equipos Top o Equipo Buscado) ---
+    if (activeTrendingFilters.searchedTeam) {
+        const searchedSport = activeTrendingFilters.searchedTeam.sport;
+        // Solo mostrar partidos del equipo buscado si el filtro de deporte es "Todos" o coincide con el deporte del equipo buscado
+        if (!activeTrendingFilters.sport || activeTrendingFilters.sport === searchedSport) {
+            const upcomingForSearchedTeam = await getNClosestUpcomingTopMatchesForSport(
+                [activeTrendingFilters.searchedTeam], // Lista con solo el equipo buscado
+                searchedSport,
+                2, // Los 2 más próximos
+                fetchedMatchIds,
+                activeTrendingFilters.leagueId // Pasa el leagueId si está activo (para filtrar aun más si es de ese equipo y esa liga)
+            );
+            upcomingForSearchedTeam.forEach(match => { 
+                if (!fetchedMatchIds.has(match._id || match.id)) {
+                    finalMatchesToShow.push(match); fetchedMatchIds.add(match._id || match.id);
+                }
+            });
+            console.log(`Trending: Próximos para equipo buscado (${activeTrendingFilters.searchedTeam.name}) añadidos:`, upcomingForSearchedTeam.length);
+        }
+        // Si el filtro de deporte es "Todos" y se buscó un equipo, mostrar también los top del otro deporte
+        if (!activeTrendingFilters.sport) { 
+            if (searchedSport === 'Football') {
+                const basketballTopTeams = topTeamConfigs.filter(t => t.sport === 'Basketball');
+                const topBasketball = await getNClosestUpcomingTopMatchesForSport(basketballTopTeams, 'Basketball', 2, fetchedMatchIds, null); // Para NBA, leagueId es null en mapping general
+                topBasketball.forEach(match => { if (!fetchedMatchIds.has(match._id || match.id)) { finalMatchesToShow.push(match); fetchedMatchIds.add(match._id || match.id); } });
+            } else if (searchedSport === 'Basketball') {
+                const footballTopTeams = topTeamConfigs.filter(t => t.sport === 'Football');
+                const topFootball = await getNClosestUpcomingTopMatchesForSport(footballTopTeams, 'Football', 2, fetchedMatchIds, activeTrendingFilters.leagueId); // Aquí el leagueId podría ser de una liga de fútbol
+                topFootball.forEach(match => { if (!fetchedMatchIds.has(match._id || match.id)) { finalMatchesToShow.push(match); fetchedMatchIds.add(match._id || match.id); } });
+            }
+        }
 
-    const basketballTopTeamsFromConfig = topTeamConfigs.filter(t => t.sport === 'Basketball');
-    if (basketballTopTeamsFromConfig.length > 0 && (!activeTrendingFilters.sport || activeTrendingFilters.sport === 'Basketball')) {
-        const topBasketballUpcoming = await getNClosestUpcomingTopMatchesForSport(basketballTopTeamsFromConfig, 'Basketball', 2, fetchedMatchIds, activeTrendingFilters.leagueId);
-        topBasketballUpcoming.forEach(match => { if (!fetchedMatchIds.has(match._id || match.id)) { allTrendingMatches.push(match); fetchedMatchIds.add(match._id || match.id); } });
-        console.log("Trending: Top Próximos Basketball añadidos:", topBasketballUpcoming.length);
+    } else { // Si no hay equipo buscado, mostrar top 2 de cada deporte (si el filtro lo permite)
+        const footballTopTeamsFromConfig = topTeamConfigs.filter(t => t.sport === 'Football');
+        if (footballTopTeamsFromConfig.length > 0 && (!activeTrendingFilters.sport || activeTrendingFilters.sport === 'Football')) {
+            const topFootballUpcoming = await getNClosestUpcomingTopMatchesForSport(footballTopTeamsFromConfig, 'Football', 2, fetchedMatchIds, activeTrendingFilters.leagueId);
+            topFootballUpcoming.forEach(match => { if (!fetchedMatchIds.has(match._id || match.id)) { finalMatchesToShow.push(match); fetchedMatchIds.add(match._id || match.id); } });
+            console.log("Trending: Top Próximos Fútbol (general) añadidos:", topFootballUpcoming.length);
+        }
+
+        const basketballTopTeamsFromConfig = topTeamConfigs.filter(t => t.sport === 'Basketball');
+        if (basketballTopTeamsFromConfig.length > 0 && (!activeTrendingFilters.sport || activeTrendingFilters.sport === 'Basketball')) {
+            const topBasketballUpcoming = await getNClosestUpcomingTopMatchesForSport(basketballTopTeamsFromConfig, 'Basketball', 2, fetchedMatchIds, null); // Para NBA general, leagueId es null
+            topBasketballUpcoming.forEach(match => { if (!fetchedMatchIds.has(match._id || match.id)) { finalMatchesToShow.push(match); fetchedMatchIds.add(match._id || match.id); } });
+            console.log("Trending: Top Próximos Basketball (general) añadidos:", topBasketballUpcoming.length);
+        }
     }
     
-    allTrendingMatches.sort((a, b) => {
+    // --- 3. Ordenar y Filtrar por Favoritos ---
+    finalMatchesToShow.sort((a, b) => {
         const isALive = ['LIVE', 'IN_PLAY', '1H', 'HT', '2H', 'ET', 'PEN_LIVE'].includes(a.status?.toUpperCase());
         const isBLive = ['LIVE', 'IN_PLAY', '1H', 'HT', '2H', 'ET', 'PEN_LIVE'].includes(b.status?.toUpperCase());
         if (isALive && !isBLive) return -1; if (!isALive && isBLive) return 1;
         return new Date(a.matchDate) - new Date(b.matchDate);
     });
 
-    let matchesToDisplay = allTrendingMatches;
+    let matchesToDisplayAfterFavorites = finalMatchesToShow;
     if (activeTrendingFilters.favoritesOnly) {
         if (userFavoritesTrending.length === 0) { await fetchUserFavoritesTrending(); }
-        matchesToDisplay = matchesToDisplay.filter(match => userFavoritesTrending.some(fav =>
+        matchesToDisplayAfterFavorites = finalMatchesToShow.filter(match => userFavoritesTrending.some(fav =>
             (fav.apiTeamId.toString() === match.teams.home.apiTeamId?.toString() || fav.apiTeamId.toString() === match.teams.away.apiTeamId?.toString()) &&
             fav.sport.toLowerCase() === match.sport?.toLowerCase()
         ));
     }
     
+    // --- 4. Renderizar ---
     trendingMatchesContainer.innerHTML = ''; 
-    if (matchesToDisplay.length > 0) {
-        matchesToDisplay.forEach(match => { trendingMatchesContainer.innerHTML += createTrendingMatchCardHTML(match); });
+    if (matchesToDisplayAfterFavorites.length > 0) {
+        matchesToDisplayAfterFavorites.forEach(match => { trendingMatchesContainer.innerHTML += createTrendingMatchCardHTML(match); });
     } else {
         trendingMatchesContainer.innerHTML = '<div class="col-12 text-center p-5"><i class="bi bi-calendar-x fs-1 text-muted mb-3"></i><p class="text-muted">No hay partidos trending que coincidan con tus filtros.</p></div>';
     }
@@ -249,6 +447,7 @@ function setupSportFilterButtonsTrending() {
             
             activeTrendingFilters.leagueId = null; 
             activeTrendingFilters.favoritesOnly = false; 
+            activeTrendingFilters.searchedTeam = null; // <<< AÑADIR: Limpiar equipo buscado
             
             // Ajustar el selector para el botón del dropdown de ligas.
             // Asumimos que el dropdown está después del H2 "Trending Matches"
@@ -256,6 +455,7 @@ function setupSportFilterButtonsTrending() {
             const leagueDropdownButton = leagueFilterSection ? leagueFilterSection.querySelector('.dropdown-toggle.btn-sm') : null;
             if (leagueDropdownButton) leagueDropdownButton.innerHTML = '<i class="bi bi-filter me-1"></i>Filter';
             
+            updateLeagueDropdownButtonTextTrending();
             loadTrendingMatches();
         });
     });
@@ -283,6 +483,7 @@ function setupLeagueFilterDropdownTrending() {
             const filterConfig = leagueMappingsTrending[filterName];
 
             if (leagueDropdownButton) leagueDropdownButton.textContent = filterName; 
+            activeTrendingFilters.searchedTeam = null;
             
             if (filterConfig) {
                 activeTrendingFilters.leagueId = filterConfig.leagueId;
@@ -334,6 +535,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await fetchUserFavoritesTrending();
     setupSportFilterButtonsTrending(); 
     setupLeagueFilterDropdownTrending(); 
+    setupTeamSearchTrending();
     
     loadTrendingMatches(); 
 });

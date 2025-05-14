@@ -9,5 +9,7 @@ router.get('/me', protect, userController.getMyProfile);
 router.get('/me/favorites', protect, userController.getMyFavorites);
 router.post('/me/favorites', protect, userController.addFavoriteTeam);
 router.delete('/me/favorites', protect, userController.removeFavoriteTeam);
+router.delete('/me', protect, userController.deleteMyAccount); // <<< NUEVA RUTA
+
 
 module.exports = router;

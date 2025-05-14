@@ -7,6 +7,8 @@ router.get('/upcoming', protect, matchController.getUpcomingMatches);
 
 router.get('/recent', protect, matchController.getRecentMatches);
 
+router.get('/trending', protect, matchController.getTrendingMatches);
+
 router.get('/:id', protect, matchController.getMatchById);
 
 router.get('/:matchId/predictions', protect, matchController.getMatchPredictions); // <<< NUEVA RUTA
