@@ -1,0 +1,6 @@
+projectKey=SportsPredictSonarQube
+serverUrl=http://localhost:9000
+serverVersion=25.9.0.112764
+dashboardUrl=http://localhost:9000/dashboard?id=SportsPredictSonarQube
+ceTaskId=520138d0-7520-4671-a7bf-d99c30161ef3
+ceTaskUrl=http://localhost:9000/api/ce/task?id=520138d0-7520-4671-a7bf-d99c30161ef3
